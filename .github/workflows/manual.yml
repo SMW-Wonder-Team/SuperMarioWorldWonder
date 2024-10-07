@@ -1,0 +1,21 @@
+name: Build ROM
+
+on:
+  push:
+    branches:
+      - main  # Adjust this to the branch you want to trigger the action on
+  pull_request:
+
+jobs:
+  run-patch:
+    runs-on: ubuntu-latest  # Use an Ubuntu runner for running shell scripts
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Make PATCH.sh executable
+        run: chmod +x ./PATCH.sh
+
+      - name: Run PATCH.sh
+        run: ./PATCH.sh

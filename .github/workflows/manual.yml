@@ -1,6 +1,6 @@
 # .github/workflows/run-patch-bat.yml
 
-name: Run PATCH script on Windows
+name: Build ROM
 
 on:
   push:
@@ -16,6 +16,6 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v2
 
-      - name: Run patch.bat
+      - name: Build ROM
         run: .\patch.bat
         shell: cmd

@@ -7225,12 +7225,21 @@ CODE_05D8A2:
     LDA.B #$01                                ; |0 if on overworld
   + STA.B _F                                  ; /
 CODE_05D8B7:
-    REP #$30                                  ; AXY->16
-    LDA.B _E                                  ; \
-    ASL A                                     ; |
-    CLC                                       ; |Multiply level number by 3 and store in Y
-    ADC.B _E                                  ; |(Each L1/2 pointer table entry is 3 bytes long)
-    TAY                                       ; /
+;The levelnum.ips patch goes here. Skip over it $$$
+	LDA $0E		
+	STA !CurrentLevelNumber
+	ASL		
+	CLC		
+	ADC $0E		
+	TAY		
+	LDA.w $E000,Y
+	STA $65		
+	LDA.w $E001,Y
+	STA $66		
+	LDA.w $E600,Y
+	STA $68		
+	LDA.w $E601,Y
+	STA $69
     SEP #$20                                  ; A->8
     LDA.W Layer1Ptrs,Y                        ; \
     STA.B Layer1DataPtr                       ; |
@@ -7675,7 +7684,7 @@ CODE_05DC3C:
 Return05DC45:
     RTS
 
-    %insert_empty($3BA,$3BA,$3BA,$3BA,$3BA)
+;    %insert_empty($3BA,$3BA,$3BA,$3BA,$3BA) saves space for levelnum.ips
 
 Layer1Ptrs:
     dl BonusGameLevel

@@ -1,21 +1,21 @@
-name: Build ROM
+# .github/workflows/run-patch-bat.yml
+
+name: Run PATCH script on Windows
 
 on:
   push:
     branches:
-      - main  # Adjust this to the branch you want to trigger the action on
+      - main  # Adjust to your preferred branch
   pull_request:
 
 jobs:
   run-patch:
-    runs-on: ubuntu-latest  # Use an Ubuntu runner for running shell scripts
+    runs-on: windows-latest  # Specify a Windows runner for .bat files
 
     steps:
       - name: Checkout repository
         uses: actions/checkout@v2
 
-      - name: Make PATCH.sh executable
-        run: chmod +x ./PATCH.sh
-
-      - name: Run PATCH.sh
-        run: ./PATCH.sh
+      - name: Run patch.bat
+        run: .\patch.bat
+        shell: cmd

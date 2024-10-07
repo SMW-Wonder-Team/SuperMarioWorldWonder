@@ -19,3 +19,8 @@ jobs:
       - name: Build ROM
         run: .\patch.bat
         shell: cmd
+      - name: Generate Artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: Built ROM
+          path: ./SMW_U.smc  # Adjust path if the file is in a different location

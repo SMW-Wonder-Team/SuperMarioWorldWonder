@@ -1,4 +1,4 @@
-    ORG $0C8000
+    ORG $8C8000
 
 OWEventTileNum:
     db $71,$71,$71,$71,$71,$71,$6E,$11

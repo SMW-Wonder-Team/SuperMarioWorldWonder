@@ -1,4 +1,4 @@
-    ORG $068000
+    ORG $868000
 
 TestLevel:
     incbin "lvl/obj/testlevel.bin"

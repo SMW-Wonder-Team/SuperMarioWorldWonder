@@ -1,4 +1,4 @@
-    ORG $058000
+    ORG $858000
 
 TilesetMAP16Loc:
     dw Map16Tileset0                          ; Addresses to tileset-specific MAP16 data

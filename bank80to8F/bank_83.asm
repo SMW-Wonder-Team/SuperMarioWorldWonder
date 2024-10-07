@@ -1,4 +1,4 @@
-    ORG $038000
+    ORG $838000
 
 StompSFX3:
     db !SFX_STOMP1

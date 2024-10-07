@@ -1,6 +1,8 @@
-ORG $008000
+ORG $808000
 
 I_RESET:
+    JML I_RESET_FastROM                       ; resetting/turning on the SNES always jump to bank 00 no matter what, so this is to make the game jump to bank $80+.
+I_RESET_FastROM:
     SEI                                       ; Disable IRQ.
     STZ.W HW_NMITIMEN                         ; Disable IRQ, NMI and joypad reading.
     STZ.W HW_HDMAEN                           ; Disable HDMA.
@@ -35,7 +37,8 @@ I_RESET:
     SEP #$30                                  ; AXY->8
     LDA.B #$6B                                ;\ "RTL"
     STA.L OAMResetRoutine+386                 ;/
-
+    LDA.B #$01                                ;\ Actually Enable FastROM Speed
+    STA.W $420D                               ;/
     JSR UploadSPCEngine                       ; Upload the SPC engine.
     STZ.W GameMode                            ; Clear game mode.
     STZ.W OverworldOverride                   ; Clear OW bypass level number.
@@ -189,8 +192,9 @@ UploadCreditsMusic:                           ; Routine to upload credits music 
     %BorW(STA, _2)                            ;/
     BRA StartMusicUpload                      ; Upload the data.
 
-
-I_NMI:                                        ; NMI routine.
+I_NMI:
+    JML I_NMI_FASTROM                         ; Interrupts always jump to bank 00 no matter what, so this is to make the game jump to bank $80+.
+I_NMI_FASTROM:                                ; NMI routine.
     SEI                                       ; Disable interrupts to prevent interrupting an interrupt.
     PHP                                       ;\ 
     REP #$30                                  ;| AXY->16

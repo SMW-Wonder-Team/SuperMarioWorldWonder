@@ -1,4 +1,4 @@
-    ORG $078000
+    ORG $878000
 
 GhostHouseEntrance:
     incbin "lvl/obj/ghosthouseentrance.bin"

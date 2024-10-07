@@ -1,4 +1,4 @@
-ORG $008000
+ORG $808000
 
 I_RESET:
     SEI                                       ; Disable IRQ.

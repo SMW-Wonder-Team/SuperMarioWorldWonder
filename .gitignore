@@ -1,4 +1,3 @@
-*.exe
 *.smc
 *.sfc
 __*
@@ -7,3 +6,4 @@ __*
 *.log
 *.ini
 *.code-workspace
+*.sym

@@ -1,4 +1,4 @@
-    ORG $0E8000
+    ORG $8E8000
 
 SPC700Engine:
     dw SoundEffects-SPC700Engine-4

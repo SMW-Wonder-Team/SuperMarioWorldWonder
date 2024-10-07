@@ -8,24 +8,24 @@ incsrc "constants.asm"
 
 incsrc "macros.asm"
 incsrc "rammap.asm"
-incsrc "bank_00.asm"
-incsrc "bank_01.asm"
-incsrc "bank_02.asm"
-incsrc "bank_03.asm"
-incsrc "bank_04.asm"
-incsrc "bank_05.asm"
-incsrc "bank_06.asm"
-incsrc "bank_07.asm"
-incsrc "bank_08-0B.asm"
-incsrc "bank_0C.asm"
-incsrc "bank_0D.asm"
-incsrc "bank_0E.asm"
-incsrc "bank_0F.asm"
+incsrc "bank80to8F/bank_80.asm"
+incsrc "bank80to8F/bank_81.asm"
+incsrc "bank80to8F/bank_82.asm"
+incsrc "bank80to8F/bank_83.asm"
+incsrc "bank80to8F/bank_84.asm"
+incsrc "bank80to8F/bank_85.asm"
+incsrc "bank80to8F/bank_86.asm"
+incsrc "bank80to8F/bank_87.asm"
+incsrc "bank80to8F/bank_88-8B.asm"
+incsrc "bank80to8F/bank_8C.asm"
+incsrc "bank80to8F/bank_8D.asm"
+incsrc "bank80to8F/bank_8E.asm"
+incsrc "bank80to8F/bank_8F.asm"
 
 ORG $00FFC0
 
 ROMName:              db "SUPER MARIOWORLD     "                ; Internal ROM name
-MemoryMap:            db $20                                    ; LoROM, slow
+MemoryMap:            db $30                                    ; LoROM, slow
 CatridgeType:         db $02                                    ; ROM + SRAM + Battery
 ROMSize:              db $09                                    ; <= 4Mb ROM
 SRAMSize:             db $01                                    ; 16Kb SRAM

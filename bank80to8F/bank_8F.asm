@@ -1,4 +1,4 @@
-    ORG $0F8000
+    ORG $8F8000
 
 MusicSamples:
     dw SampleData-MusicSamples-4

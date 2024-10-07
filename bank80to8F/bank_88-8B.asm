@@ -1,6 +1,6 @@
     check bankcross off
 
-    ORG $088000
+    ORG $888000
 
  if ver_is_japanese(!_VER)                    ;\======================== J ====================
 GFX32:                                        ;!

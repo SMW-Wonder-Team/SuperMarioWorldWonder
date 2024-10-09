@@ -322,3 +322,5 @@ endif                                         ;/================================
     %insert_empty($17E,$2F3,$2F3,$2F3,$265)
 
     check bankcross on
+org $8bfffe
+nop

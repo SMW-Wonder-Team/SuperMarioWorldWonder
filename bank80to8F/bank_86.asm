@@ -341,3 +341,5 @@ CSSub1Level1C0:
     incbin "lvl/obj/1C0_CSsub.bin"
 
     %insert_empty($ACD,$AC7,$AC7,$AC7,$AC7)
+org $86fffe
+nop

@@ -81,3 +81,5 @@ SampleData_End:
     db $00,$00,$00,$00,$00,$00,$00,$00
 
     %insert_empty($1070,$1070,$1070,$1070,$1070)
+org $8ffffe
+nop

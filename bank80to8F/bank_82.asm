@@ -16981,3 +16981,5 @@ ADDR_02FFDD:
     RTS
 
     %insert_empty($05,$1E,$1E,$24,$30)
+org $82fffe
+nop

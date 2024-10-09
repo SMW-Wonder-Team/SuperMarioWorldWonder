@@ -14811,3 +14811,5 @@ CODE_00FF73:
     RTL
 
     %insert_empty($90,$2D,$2D,$0B,$0B)
+org $80fffe
+nop

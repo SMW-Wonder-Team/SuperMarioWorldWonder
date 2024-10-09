@@ -9285,3 +9285,5 @@ SpecEneNameStripe0C:                          ;!
 endif                                         ;/===============================================
 
     %insert_empty($315,$161,$161,$161,$161)
+org $8dfffe
+nop

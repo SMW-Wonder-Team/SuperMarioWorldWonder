@@ -11893,3 +11893,5 @@ MusicBank3_End:
     db $00,$00,$00,$00,$00
 
     %insert_empty($220,$220,$220,$220,$220)
+org $83fffe
+nop

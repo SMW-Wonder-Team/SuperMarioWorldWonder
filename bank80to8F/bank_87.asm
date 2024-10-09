@@ -1348,3 +1348,5 @@ CODE_07FC52:
     RTL
 
     %insert_empty($370,$370,$370,$370,$370)
+org $87fffe
+nop

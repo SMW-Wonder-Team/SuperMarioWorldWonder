@@ -17117,3 +17117,5 @@ CODE_01FF98:
     RTS
 
     %insert_empty($3E,$41,$41,$41,$41)
+org $81fffe
+nop

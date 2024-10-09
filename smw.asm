@@ -1,5 +1,5 @@
 ;================================
-; Super Mario World Disassembly X
+; Super Mario World Wonder
 ;================================
 
 lorom
@@ -8,6 +8,7 @@ incsrc "constants.asm"
 
 incsrc "macros.asm"
 incsrc "rammap.asm"
+incsrc "customrammap.asm"
 incsrc "bank80to8F/bank_80.asm"
 incsrc "bank80to8F/bank_81.asm"
 incsrc "bank80to8F/bank_82.asm"

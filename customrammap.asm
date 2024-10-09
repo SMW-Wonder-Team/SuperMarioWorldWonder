@@ -1,0 +1,1 @@
+!CurrentLevelNumber = $010B ;2 bytes - Current Level Number aquired by levelnum.ips

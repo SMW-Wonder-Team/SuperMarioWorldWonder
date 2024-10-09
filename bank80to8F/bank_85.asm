@@ -1715,7 +1715,7 @@ CODE_058D7A:
     PLP
     RTL
 
-    %insert_empty($1E7,$1E7,$1E7,$1E7,$1C2)
+;    %insert_empty($1E7,$1E7,$1E7,$1E7,$1C2) $$$
 
 Layer3Ptr:
     dl Tilemap_L3Tide
@@ -2450,7 +2450,7 @@ Tilemap_L3Rocks:
     db $FD,$11,$FE,$11,$FC,$11,$DA,$55
     db $FF
 
-    %insert_empty($1E,$1E,$1E,$1E,$1E)
+;    %insert_empty($1E,$1E,$1E,$1E,$1E) $$$
 
 DATA_05A580:
 if ver_is_japanese(!_VER)                     ;\======================== J ====================
@@ -4446,7 +4446,7 @@ CODE_05BB88:
     PLB
     RTL
 
-    %insert_empty($48A,$5A,$84,$5A,$4A)
+;    %insert_empty($48A,$5A,$84,$5A,$4A) $$$
 
 ProcScreenScrollCmds:
     PHB
@@ -6815,7 +6815,7 @@ CODE_05CFA0:
 Return05CFE9:
     RTS
 
-    %insert_empty($114,$16,$16,$16,$16)
+;    %insert_empty($114,$16,$16,$16,$16) $$$
 
 OWL1CharData:
     db $22,$01
@@ -7027,7 +7027,7 @@ DATA_05D608:
     db $67,$68,$56,$53,$54,$5F,$57,$59
     db $51,$5A,$5D,$50,$5C
 
-    %insert_empty($A3,$A3,$A3,$A3,$A3)
+;    %insert_empty($A3,$A3,$A3,$A3,$A3) $$$
 
 DATA_05D708:
     db $00,$60,$C0,$00
@@ -7225,13 +7225,23 @@ CODE_05D8A2:
     LDA.B #$01                                ; |0 if on overworld
   + STA.B _F                                  ; /
 CODE_05D8B7:
+;The levelnum.ips patch goes here. Skip over it
     REP #$30                                  ; AXY->16
     LDA.B _E                                  ; \
+    STA !CurrentLevelNumber                                ;  levelnum
     ASL A                                     ; |
     CLC                                       ; |Multiply level number by 3 and store in Y
     ADC.B _E                                  ; |(Each L1/2 pointer table entry is 3 bytes long)
     TAY                                       ; /
-    SEP #$20                                  ; A->8
+    LDA.w $E000,Y                             ; more levelnum
+	STA $65		
+	LDA.w $E001,Y
+	STA $66		
+	LDA.w $E600,Y
+	STA $68		
+	LDA.w $E601,Y
+	STA $69	
+    SEP #$20                                 ; A->8
     LDA.W Layer1Ptrs,Y                        ; \
     STA.B Layer1DataPtr                       ; |
     LDA.W Layer1Ptrs+1,Y                      ; |Load Layer 1 pointer into $65-$67
@@ -7675,7 +7685,7 @@ CODE_05DC3C:
 Return05DC45:
     RTS
 
-    %insert_empty($3BA,$3BA,$3BA,$3BA,$3BA)
+;    %insert_empty($3BA,$3BA,$3BA,$3BA,$3BA) $$$
 
 Layer1Ptrs:
     dl BonusGameLevel

@@ -1,13 +1,15 @@
 ;================================
-; Super Mario World Disassembly X
+; Super Mario World Wonder
 ;================================
 
 lorom
 math pri on
 incsrc "constants.asm"
-
+incsrc "customrammap.asm"
 incsrc "macros.asm"
 incsrc "rammap.asm"
+incsrc "bank90to9F/level_code.asm"
+incsrc "bank90to9F/level_init_code.asm"
 incsrc "bank80to8F/bank_80.asm"
 incsrc "bank80to8F/bank_81.asm"
 incsrc "bank80to8F/bank_82.asm"
@@ -21,16 +23,17 @@ incsrc "bank80to8F/bank_8C.asm"
 incsrc "bank80to8F/bank_8D.asm"
 incsrc "bank80to8F/bank_8E.asm"
 incsrc "bank80to8F/bank_8F.asm"
+incsrc "bank90to9F/bank_90.asm"
 
 ORG $00FFC0
 
 ROMName:              db "SUPER MARIOWORLD     "                ; Internal ROM name
-MemoryMap:            db $30                                    ; LoROM, slow
+MemoryMap:            db $30                                    ; LoROM, FastROM
 CatridgeType:         db $02                                    ; ROM + SRAM + Battery
-ROMSize:              db $09                                    ; <= 4Mb ROM
+ROMSize:              db $0A                                    ; <= 4Mb ROM
 SRAMSize:             db $01                                    ; 16Kb SRAM
 DestinationCode:      db con($00,$01,$00,$02,$02)
-LicenseeCode:         db $01                                    ; Nintendo EAD
+LicenseeCode:         db $6D                                    ; Team Wonder
 MaskROMVersion:       db con($00,$00,$00,$00,$01)
 Checksum:             dw con($737F,$5F25,$FFFF,$F616,$3AC9)     ;\ Note that the SS checksum and complement are wrong
                       dw con($8C80,$A0DA,$0000,$09E9,$C536)     ;/ They should be $B4CF and $4B30

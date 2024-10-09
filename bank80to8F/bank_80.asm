@@ -11886,6 +11886,9 @@ CODE_00EA32:
     JSR CODE_00FDA5
     STZ.B PlayerYSpeed+1
 CODE_00EA5E:
+    LDA #$01        ; \
+	STA $75         ; | ;Fixes a glitch where the bounce counter increments underwater (from thomas's patch)
+	STZ $1697|!addr ; /
     LDA.B #$01
     STA.B PlayerInWater
 CODE_00EA62:
@@ -14780,7 +14783,7 @@ ADDR_00FF32:
     SEC
     SBC.B _0
     STA.B Layer3YPos
-    SEP #$20                                  ; A->8
+    SEP #$20                                  ; A->8unused
     RTL
 
 CODE_00FF61:

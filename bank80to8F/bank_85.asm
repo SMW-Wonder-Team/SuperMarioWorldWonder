@@ -108,10 +108,14 @@ endif                                         ;/================================
     LDA.W #$0202
     STA.B Layer1ScrollDir
 CODE_0580BD:
+;VRAM PATCH HIJACK(s)
     REP #$30                                  ; AXY->16
-    JSL CODE_0588EC
-    JSL CODE_058955
-    JSL UploadOneMap16Strip
+;    JSL CODE_0588EC
+;    JSL CODE_058955 ;VRAM PATCH HIJACK UPLOADBGTADA
+    JSL L1Load_Hack
+    JSL L2Load_Hack
+    JSL UploadBGData
+;    JSL UploadOneMap16Strip
     REP #$30                                  ; AXY->16
     INC.B Layer1TileDown
     INC.B Layer2TileDown

@@ -274,7 +274,8 @@ ScrollUpdateSuppress: ;LM Custom VRAM Patch #1
 
 CODE_008209:                                  ;|
 ;VRAM Patch UploadBGData
-    JSL UploadOneMap16Strip                   ;| Update Layer 1/2 tilemaps.
+    JSL UploadBGData
+;    JSL UploadOneMap16Strip                   ;| Update Layer 1/2 tilemaps.
     LDA.W UploadMarioStart                    ;|\ 
     BEQ CODE_008217                           ;|| If set to do so, upload graphics for black screen messages (MARIO START/GAME OVER/TIME UP/etc).
     JSR CODE_00A7C2                           ;||  Then skip way down to the $12 tilemap handling.

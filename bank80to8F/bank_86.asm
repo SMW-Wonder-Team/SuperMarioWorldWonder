@@ -158,8 +158,6 @@ DS2Level10B:
 DS2Sub1Level1C6:
     incbin "lvl/obj/1C6_DS2sub.bin"
 
-    %insert_empty($4A,$47,$47,$47,$47)
-
 VD1Level11A:
 if ver_is_japanese(!_VER)                     ;\======================= J =====================
     incbin "lvl/obj/11A_VD1main_J.bin"        ;!
@@ -339,5 +337,124 @@ CSSub4Level1EE:
     incbin "lvl/obj/1EE_CSend.bin"
 CSSub1Level1C0:
     incbin "lvl/obj/1C0_CSsub.bin"
+CODE_06F540:
+	CMP #$0400			;\ Branch if on pages 0-1.
+	BCC label_06F5B9	;/
+	CMP #$0600			;\ Branch if on page 2 (tileset-specific).
+	BCC label_06F578	;/  If disabled (which is the default now), the CMP value will be #$0000 instead.
+	ASL A				;\ Branch A if on page 40-7F.
+	BCS label_06F58E	;/
+	ASL A				;\ Branch B if on page 20-3F
+	BCS label_06F564	;/
+	BMI label_06F55B	; Branch C if on page 10-1F.
+label_06F552:			; Tile on page 02-0F.
+	ADC #$878C			;\ Pointer for page 02-0F (add 0 for carry).
+	LDY #$1000			;/  Note: tile is left-shifted 3 times at this point (x8).
+	STY $0B
+	RTL
 
-    %insert_empty($ACD,$AC7,$AC7,$AC7,$AC7)
+label_06F55B:			; Tile on page 10-1F.
+	ADC #$0000			;\ Pointer for page 10-1F (add 0 for carry).
+	LDY #$1300			;/
+	STY $0B
+	RTL
+
+label_06F564:			; Tile on page 20-3F.
+	BMI label_06F56F	; Branch if on page 30-3F.
+	ADC #$7FFF			;\ Pointer for page 20-2F (add 1 for carry).
+	LDY #$1400			;/
+	STY $0B
+	RTL
+
+label_06F56F:			; Tile on page 30-3F.
+	ADC #$7FFF			;\ Pointer for page 30-3F (add 1 for carry).
+	LDY #$0000			;/
+	STY $0B
+	RTL
+
+label_06F578:			; tile is on page 2 (tileset-specific). Deprecated, but LM inserts this even if not enabled.
+	STA $0B				;\ 
+	LDA $1930			;| Add the FG/BG tileset number to the tile's high byte. The result ends up like so:
+	AND #$0F00			;|  [0ttttbbb bbbbb000] + 0x1000
+	ASL A				;| Where bbbbbbbb is the low byte of the tile number (i.e. $2xx)
+	ADC $0B				;|  and tttt is the FG/BG tileset number (00-0E).
+	ASL A				;| The result will be between 0x1000 and 0x8FF8. In other words, 0x800 bytes per tileset.
+	ASL A				;|
+	ADC #$A810			;|] This value is some addition to the above value to offset the data depending on space requirements.
+	LDY #$1400			;| In a ROM where there are no tileset-specific tiles, the bank byte in Y here will be 0x00.
+	STY $0B				;/
+	RTL
+
+label_06F58E:			; Tile on page 40-7F.
+	ASL A				;\ Branch A if on page 60-7F.
+	BCS label_06F5A5	;/
+	BMI label_06F59C	; Branch B if on page 50-5F.
+label_06F593:			; Tile is on page 40-4F.
+	ADC #$0000			;\ Pointer for page 40-4F (add 0 for carry).
+	LDY #$0000			;/
+	STY $0B
+	RTL
+
+label_06F59C:			; Tile is on page 50-5F.
+	ADC #$8000			;\ Pointer for page 50-5F (add 0 for carry).
+	LDY #$0000			;/
+	STY $0B
+	RTL
+
+label_06F5A5:			; Tile is on page 60-7F.
+	BMI label_06F5B0	; Branch if on 70-7F.
+	ADC #$FFFF			;\ Pointer for page 60-6F (add 1 for carry).
+	LDY #$0000			;/
+	STY $0B
+	RTL
+
+label_06F5B0:			; Tile is on page 70-7F.
+	ADC #$FFFF			;\ Pointer for page 70-7F (add 1 for carry).
+	LDY #$1500			;/
+	STY $0B
+	RTL
+
+
+
+label_06F5B9:			; Tile is on page 0/1.
+	TAY
+	LDA $1930			;\ 
+	CMP #$1000			;| Determine the bank the Map16 data is contained in.
+	BCC label_06F5C7	;| If the FG/BG tileset number is less than 10 (levels),
+	LDA #$0500			;|   $0B = 0x0D00
+	BRA label_06F5CA	;| Else (overworld),
+label_06F5C7:			;|   $0B = 0x0500
+	LDA #$0D00			;|
+label_06F5CA:			;| Essentially this determines whether to use the tables at $0D8000, or at $05D000.
+	STA $0B				;/
+	LDA $0FBE,Y
+	RTL
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+label_06F5D0:		; Alternative entry to $06F540, storing Y to $05 instead of $0B.
+	REP #$20		;  Used by the tile generation routine at $00BEB0, which expect a Map16 pointer in $04 rather than $0A.
+	TYA
+	PEI ($0B)
+	PHK
+	PER .returnHere
+	BRL CODE_06F540
+  .returnHere
+	LDY $0B
+	STY $05
+	PLY
+	STY $0B
+	RTL
+	
+label_06F5E4:		; Alternative entry to $06F540, storing the pointer to $65.
+	ASL A			;  Used by the overworld for its Layer 1 tiles.
+	PHK
+	PER .returnHere
+	BRL CODE_06F540
+  .returnHere
+	LDY $0B
+	STY $66
+	STA $65
+	LDY #$0000
+	RTL

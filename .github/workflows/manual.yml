@@ -17,9 +17,17 @@ jobs:
         uses: actions/checkout@v2
 
       - name: Build ROM
-        run: .\patch.bat
+        id: patch_run
+        run: .\patch.bat > patch_log.txt
         shell: cmd
+
+      - name: Check if ROM bad
+        run: |
+          if (Select-String -Pattern "Aborting." -Path patch_log.txt) { exit 1 }
+        shell: pwsh
+        
       - name: Generate Artifact
+        if: success()  # Only upload if no "Aborting." found
         uses: actions/upload-artifact@v3
         with:
           name: Built ROM

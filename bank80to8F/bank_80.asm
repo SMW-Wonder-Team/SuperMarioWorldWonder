@@ -237,7 +237,6 @@ I_NMI_FASTROM:                                ; NMI routine.
     LDA.W IRQNMICommand                       ;\ Check if a regular level.
     BPL RegularLevelNMI                       ;|
     JMP Mode7NMI                              ;/ Otherwise, go to mode 7 routines.
-
 RegularLevelNMI:                              ;\ Set color math on all layers in $40 but 3.
     LDA.B ColorSettings                       ;|
     AND.B #~!HW_CMath_BG3                     ;/
@@ -248,8 +247,9 @@ RegularLevelNMI:                              ;\ Set color math on all layers in
     BEQ +                                     ;| If the game is lagging, skip updating stuff like sprite OAM and controller data.
     LDA.W IRQNMICommand                       ;| If in a special level, skip updating layer positions too.
     LSR A                                     ;|
-    BEQ NotSpecialLevelNMI                    ;/
-    JMP SpecialLevelNMI                       ;
+    JML ScrollUpdateSuppress
+;    BEQ NotSpecialLevelNMI                   ;/ ;Lunar Magic VRAM Patch Hijack #1
+;    JMP SpecialLevelNMI                      ;
 
   + INC.B LagFlag                             ; Allow the game loop to run after NMI.
     JSR CODE_00A488                           ; Upload palette to CGRAM.
@@ -265,6 +265,13 @@ RegularLevelNMI:                              ;\ Set color math on all layers in
     BEQ CODE_00821A                           ;||
     JSL CODE_0C9567                           ;||
     BRA CODE_00821A                           ;|/
+ScrollUpdateSuppress: ;LM Custom VRAM Patch #1
+	BEQ .normallevel
+	JML SpecialLevelNMI		;back to SMW and something special is playing
+
+.normallevel
+	JML NotSpecialLevelNMI		;back to SMW and do NOT update scroll register $$$ is this fine?
+
 CODE_008209:                                  ;|
     JSL UploadOneMap16Strip                   ;| Update Layer 1/2 tilemaps.
     LDA.W UploadMarioStart                    ;|\ 

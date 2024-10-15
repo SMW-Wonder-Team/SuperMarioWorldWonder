@@ -6145,7 +6145,7 @@ CODE_01AD42:
     INY
   + RTS
 
-    %insert_empty($02,$05,$05,$05,$00)
+;    %insert_empty($02,$05,$05,$05,$00)
 
 InitFlying_Block:
     LDA.B SpriteXPosLow,X

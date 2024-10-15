@@ -21,11 +21,12 @@ incsrc "bank80to8F/bank_8C.asm"
 incsrc "bank80to8F/bank_8D.asm"
 incsrc "bank80to8F/bank_8E.asm"
 incsrc "bank80to8F/bank_8F.asm"
-
+ORG $00FFD6
+	db $40
 ORG $00FFC0
 
 ROMName:              db "SUPER MARIOWORLD     "                ; Internal ROM name
-MemoryMap:            db $30                                    ; LoROM, slow
+MemoryMap:            db %00110010                              ; LoROM, fast, SDD1
 CatridgeType:         db $02                                    ; ROM + SRAM + Battery
 ROMSize:              db $09                                    ; <= 4Mb ROM
 SRAMSize:             db $01                                    ; 16Kb SRAM

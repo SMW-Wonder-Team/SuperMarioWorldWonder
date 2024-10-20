@@ -4407,6 +4407,9 @@ GrndShakeDispYHi:
     db $12,$22,$12,$02
 
 GM14Level:
+;GM14 UAT codes
+    JSL.l GroundPoundAbility
+    JSL.l WallKickAbility ;bank 90
     LDA.W MessageBoxTrigger
     BEQ +
     JSL CODE_05B10C
@@ -4436,6 +4439,7 @@ GM14Level:
     BEQ CODE_00A21B
     DEC.W PauseTimer
     BRA CODE_00A242
+    
 
 CODE_00A21B:
     LDA.B byetudlrFrame
@@ -4459,7 +4463,7 @@ CODE_00A242:
     LDA.W PauseFlag
     BEQ CODE_00A28A
     BRA CODE_00A25B
-
+    ;UberASM Codes for GM14
     BIT.W byetudlrP2Frame                     ; \ Unreachable
     BVS ADDR_00A259                           ; | Debug: Slow motion
     LDA.W byetudlrP2Hold                      ; |
@@ -4469,7 +4473,6 @@ CODE_00A242:
     BNE CODE_00A25B                           ; |
 ADDR_00A259:
     BRA CODE_00A28A                           ; /
-
 CODE_00A25B:
 if ver_is_console(!_VER)                      ;\================== J, U, E0, & E1 =============
     LDA.B byetudlrHold                        ;!
@@ -6128,7 +6131,7 @@ CODE_00B068:
 Return00B090:
     RTS
 
-    %insert_empty($11,$0F,$36,$1D,$1B)
+;    %insert_empty($11,$0F,$36,$1D,$1B)
 
 BackAreaColors:
     %incpal("col/misc/back_area.pal")
@@ -6598,7 +6601,7 @@ PrepareGraphicsFile:
     PLB
     RTL
 
-    %insert_empty($12,$13,$03,$00,$00)
+;    %insert_empty($12,$13,$03,$00,$00)
 
 DATA_00BA60:
     db Map16TilesLow
@@ -7829,7 +7832,7 @@ CODE_00C3D1:
     STA.L DynStripeImgSize
     RTS
 
-    %insert_empty($0D,$0D,$0D,$0D,$0C)
+;    %insert_empty($0D,$0D,$0D,$0D,$0C)
 
     db $80,$40,$20,$10,$08,$04,$02,$01
     db $80,$40,$20,$10,$08,$04,$02,$01
@@ -9019,7 +9022,7 @@ CODE_00CDF6:
     LDA.B axlr0000Hold                        ; \ Branch if anything besides L/R being held
     AND.B #$CF                                ; |
     ORA.B byetudlrHold                        ; |
-    BNE CODE_00CE49                           ; /
+    BRA CODE_00CE49                           ; / ;Removes LR Scroll (BNE -> BRA)
     LDA.B axlr0000Hold                        ; \ Branch if L/R not being held
     AND.B #$30                                ; |
     BEQ CODE_00CE49                           ; |
@@ -11886,9 +11889,9 @@ CODE_00EA32:
     JSR CODE_00FDA5
     STZ.B PlayerYSpeed+1
 CODE_00EA5E:
-    LDA #$01        ; \
+    LDA #$01            ; \
 	STA $75         ; | ;Fixes a glitch where the bounce counter increments underwater (from thomas's patch)
-	STZ $1697|!addr ; /
+	STZ $1697       ; /
     LDA.B #$01
     STA.B PlayerInWater
 CODE_00EA62:
@@ -14053,7 +14056,7 @@ CODE_00F9C9:
     SEP #$20                                  ; A->8
     RTS
 
-    %insert_empty($1B,$1B,$1B,$4D,$4D)
+;    %insert_empty($1B,$1B,$1B,$4D,$4D)
 
     LDX.B #$0B                                ; \ Unreachable
   - STZ.W SpriteStatus,X                      ; | Clear out sprite status table
@@ -14813,6 +14816,6 @@ CODE_00FF73:
     SEP #$20                                  ; A->8
     RTL
 
-    %insert_empty($90,$2D,$2D,$0B,$0B)
+;    %insert_empty($90,$2D,$2D,$0B,$0B)
 org $80fffe
 nop

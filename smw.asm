@@ -5,7 +5,7 @@
 lorom
 math pri on
 incsrc "constants.asm"
-
+incsrc "defines.asm"
 incsrc "macros.asm"
 incsrc "rammap.asm"
 incsrc "bank80to8F/bank_80.asm"
@@ -21,11 +21,11 @@ incsrc "bank80to8F/bank_8C.asm"
 incsrc "bank80to8F/bank_8D.asm"
 incsrc "bank80to8F/bank_8E.asm"
 incsrc "bank80to8F/bank_8F.asm"
-
+incsrc "bank90to9F/bank_90.asm"
 ORG $00FFC0
 
 ROMName:              db "SUPER MARIOWORLD     "                ; Internal ROM name
-MemoryMap:            db $30                                    ; LoROM, slow
+MemoryMap:            db $30                                    ; LoROM, fast
 CatridgeType:         db $02                                    ; ROM + SRAM + Battery
 ROMSize:              db $09                                    ; <= 4Mb ROM
 SRAMSize:             db $01                                    ; 16Kb SRAM

@@ -3635,6 +3635,8 @@ HandleSprSpinJump:
     LSR A                                     ; |
     LSR A                                     ; |
     AND.B #$03                                ; |
+    BRA.b DisplaySpinJumpSmoke
+DisplaySpinJumpSmoke:
     PHX                                       ; |
     TAX                                       ; |
     LDA.W SpinJumpSmokeTiles,X                ; |
@@ -17116,6 +17118,6 @@ CODE_01FF98:
     PLX
     RTS
 
-    %insert_empty($3E,$41,$41,$41,$41)
+;    %insert_empty($3E,$41,$41,$41,$41)
 org $81fffe
 nop

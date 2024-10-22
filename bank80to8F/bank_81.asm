@@ -2753,13 +2753,16 @@ CODE_019386:
     BEQ Return0193AF                          ; /
     CMP.B #$0B                                ; \ Return if sprite status == Carried
     BEQ Return0193AF                          ; /
-    LDA.B SpriteYPosLow,X
-    SEC
-    SBC.B #$01
-    STA.B SpriteYPosLow,X
-    LDA.W SpriteYPosHigh,X
-    SBC.B #$00
-    STA.W SpriteYPosHigh,X
+    ;Optimize 1F0
+    LDA $0C
+    AND #$0F
+    EOR #$FF
+    CLC
+    ADC !sprite_y_low,x
+    STA !sprite_y_low,x
+    LDA !sprite_y_high,x
+    ADC #$FF
+    STA !sprite_y_high,x
     JSR CODE_0192C9
 Return0193AF:
     RTS

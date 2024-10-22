@@ -35,6 +35,13 @@
 !GroundPndFlag = $1869	;also acts like speed container for faster fall. RAM reusin' rules
 !GroundPndTimer = $186A	;how long to stay in air after pressing trigger button. also used for delay before player can re-activate ground pound again.
 
+!cpu_meter_dim_screen     = 0
+!cpu_meter_have_star      = 1
+
+!cpu_meter_star_x_pos     = $00
+!cpu_meter_star_tile      = $EF
+!cpu_meter_star_props     = %00110100
+
 !Up = $01;%00000001
 !Down = $02;%00000010
 !L = $04;%00000100
@@ -89,3 +96,5 @@ elseif !GPCancelButton = !R
 else;if !CancelButton = or(!B, !A)
   !GPCancelButtonTrigger = $80
 endif
+!sprite_y_low = $D8
+!sprite_y_high = $14D4

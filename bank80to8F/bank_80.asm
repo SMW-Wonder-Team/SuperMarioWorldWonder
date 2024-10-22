@@ -55,9 +55,28 @@ GameLoop:                                     ; Main game loop.
     CLI                                       ; Enable interrupts.
     INC.B TrueFrame                           ; Increment global frame counter.
     JSR RunGameMode                           ; Run the game.
+if !cpu_meter_dim_screen
+        LDA #$0B
+        STA $2100       ;   make the screen darker
+endif
+   if !cpu_meter_have_star
+    LDA $2137       ;   Prepare H/V-count data
+    LDA $213D       ;   Get V-count data
+    STA $02ED
+    LDA #!cpu_meter_star_tile
+    STA $02EE
+    LDA #!cpu_meter_star_props
+    STA $02EF
+    if !cpu_meter_star_x_pos == $00
+            STZ $02EC
+    else
+            LDA #!cpu_meter_star_x_pos
+            STA $02EC
+    endif
+   endif
+    STZ $045B
     STZ.B LagFlag                             ; Indicate that the current frame has finished.
     BRA GameLoop                              ;
-
 SPC700UploadLoop:                             ; Subroutine to upload data to the SPC chip. 24-bit pointer to data should be in $00.
     PHP                                       ;
     REP #$30                                  ; AXY->16

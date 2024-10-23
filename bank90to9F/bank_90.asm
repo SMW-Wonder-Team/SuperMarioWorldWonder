@@ -1253,7 +1253,7 @@ Init_BG2:
 
 ;	LDA $058DA2	;map16 tilemap data location in ROM...changes with hack!
 ;	STA $0A
-	JSL $0EFD00	;LM 1.67, get BG Map16 pointer
+	JSL GetBGMap16Page	;LM 1.67, get BG Map16 pointer
 
 	LDA $05		;copy size of BG over to free RAM
 	STA !BG2_size

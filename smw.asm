@@ -52,3 +52,5 @@ EmulationVectors:     dw con($FFFF,$FFFF,$0000,$0000,$0000)     ;|
                       dw I_EMPTY
                       dw I_RESET
                       dw I_EMPTY
+org $9FFFFE 							;\ Increase the rom size to 1MB so it can open in bsnes
+nop								;/ There are 20 banks in 1mb, go to the 20th one (9F in this case, and go to FFFE and insert a NOP (1B) )

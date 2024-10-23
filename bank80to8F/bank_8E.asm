@@ -8144,5 +8144,54 @@ else                                          ;<================= U, SS, E0, & E
     db $00,$00,$00,$00,$00,$00,$00,$00        ;!
     db $00,$00,$00,$00,$00,$00,$00,$00        ;!
 endif                                         ;/===============================================
+GetBGMap16Page:
+	PHP
+	REP #$30
+	LDX #$0000
+	LDY #$01B0
+	LDA $7FC00B			;\ 
+	BIT #$0004			;| If high bit 2 is clear (F bit), vanilla tilemap system is used.
+	BEQ .vanilla		;/
+	AND #$00F0			;\ 
+	LSR #3				;|
+	STA $0A				;|
+	LSR					;|
+	CLC					;|
+	ADC $0A				;|
+	TAX					;|
+	LDY #$0200			;/
 
-    %insert_empty($F00,$F10,$F10,$F10,$F10)
+  .vanilla:
+	STY $05
+	PHB
+	PHK
+	PLB
+	LDA.w PagePointers,X
+	STA $0A
+	LDA.w PagePointers+1,X
+	STA $0B
+	PLB
+	PLP
+	LDA $1928
+	RTL
+PagePointers:
+	dl Map16BGTiles		; pages 80-8F (vanilla)
+	dl $000000		; pages 90-9F
+	dl $000000		; pages A0-AF
+	dl $000000		; pages B0-BF
+	dl $000000		; pages C0-CF
+	dl $000000		; pages D0-DF
+	dl $000000		; pages E0-EF
+	dl $000000		; pages F0-FF
+
+unused:				; Seem to be unused additional pointers?
+	dl $000000
+	dl $000000
+	dl $000000
+	dl $000000
+	dl $000000
+	dl $000000
+	dl $000000
+	dl $000000
+org $8EFFFE
+nop

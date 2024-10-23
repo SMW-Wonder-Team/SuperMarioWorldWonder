@@ -1657,8 +1657,9 @@ CODE_058D7A:
     LDA.W #$BD00
     STA.B Map16HighPtr
     LDA.W #Map16BGTiles
-    STA.B _A
-    LDA.W LevelLoadObject
+    JSL GetBGMap16Page
+;    STA.B _A
+;    LDA.W LevelLoadObject
     AND.W #$00F0
     BEQ +
     LDA.B Map16LowPtr

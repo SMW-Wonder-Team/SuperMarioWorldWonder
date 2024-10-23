@@ -51,3 +51,5 @@ EmulationVectors:     dw con($FFFF,$FFFF,$0000,$0000,$0000)     ;|
                       dw I_EMPTY
                       dw I_RESET
                       dw I_EMPTY
+org $9FFFFE                                                     ;\ Expand the rom to 1MB
+NOP                                                             ;/ 

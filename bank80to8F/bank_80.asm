@@ -433,9 +433,9 @@ Mode7Lagging:                                 ; Transfer various RAM mirrors to 
     LDA.B Mode7ParamD+1
     STA.W HW_M7D
     JSR SETL1SCROLL
-    LDA.W IRQNMICommand                       ;\ 
-    LSR A                                     ;| Branch if not in Bowser's room.
-    BCC +                                     ;/
+ ;   LDA.W IRQNMICommand                       ;\ 
+ ;   LSR A                                     ;| Branch if not in Bowser's room. (Disabled to enable M7 in other levels)
+ ;   BCC +                                     ;/
     LDA.W Brightness
     STA.W HW_INIDISP
     LDA.W HDMAEnable
@@ -476,13 +476,15 @@ IRQNMIEnding:
     LDY.B #31
     JSR WaitForHBlank
     LDA.B Layer3XPos                          ;\ Adjust scroll settings for layer 3
-    STA.W HW_BG3HOFS                          ;|
-    LDA.B Layer3XPos+1                        ;|
-    STA.W HW_BG3HOFS                          ;|
+    STA.W HW_BG3HOFS                          ;| Optimization: Fix LDA Spam
+    REP.b #$30                                ;|
+;    LDA.B Layer3XPos+1                       ;|
+;    STA.W HW_BG3HOFS                         ;|
     LDA.B Layer3YPos                          ;|
     STA.W HW_BG3VOFS                          ;|
-    LDA.B Layer3YPos+1                        ;|
-    STA.W HW_BG3VOFS                          ;/
+;    LDA.B Layer3YPos+1                       ;|
+;   STA.W HW_BG3VOFS                          ;|
+    SEP.b #$30                                ;/
 CODE_0083A8:
     LDA.B MainBGMode                          ;\ Set the layer BG sizes, L3 priority, and BG mode
     STA.W HW_BGMODE                           ;/ (Effectively, this is the screen mode)
@@ -528,9 +530,9 @@ CODE_0083E3:
 CODE_0083F3:                                  ; IRQ done; wait for H-blank, then update registers.
     STA.W HW_NMITIMEN                         ;
     JSR WaitLongForHBlank                     ; Wait until we enter an H-blank, then update the registers.
-    NOP
-    NOP
-    LDA.B #!HW_BG_Mode7
+;    NOP ;Optimization: What?
+;    NOP
+    LDA.B #!HW_BG_Mode7 
     STA.W HW_BGMODE
     LDA.B Mode7XPos
     STA.W HW_BG1HOFS
@@ -547,10 +549,12 @@ SETL1SCROLL:
     STA.W HW_BG1SC
     LDA.B #VRam_L1Mode7Tiles>>12
     STA.W HW_BG12NBA
+    REP.b #$20
     LDA.B Layer1XPos
     STA.W HW_BG1HOFS
-    LDA.B Layer1XPos+1
-    STA.W HW_BG1HOFS
+;    LDA.B Layer1XPos+1 ; Optimization: Removed more LDA Spam
+;    STA.W HW_BG1HOFS
+    SEP.b #$20
     LDA.B Layer1YPos
     CLC
     ADC.W ScreenShakeYOffset
@@ -770,7 +774,7 @@ LoadScrnImage:                                ; Routine to upload a stripe image
     RTS
 
 ClearOutLayer3:                               ; DMA upload routine to clean out the layer 3 tilemap.
-    JSR TurnOffIO                             ;
+;    JSR TurnOffIO                             ; Removed for flexibility
     LDA.B #!EmptyTile                         ;\ Tile to use as the blank tile.
     STA.B _0                                  ;/
     STZ.W HW_VMAINC                           ;] Single byte VRAM upload.
@@ -806,7 +810,9 @@ ClearOutLayer3:                               ; DMA upload routine to clean out 
 
 ClearTilemapDMAData:                          ; DMA setting data for channel 1; $4310-$4316, in reverse order.
     %DMASettings(!HW_DMA_ABusFix,HW_VMDATA,0,$1000)
-
+;This routine should really be rewritten from scratch, but whatever. Also, why get Controller2 Data when 2nd player isnt there anyways
+NotTwoPlayerGame:
+RTS
 ControllerUpdate:                             ; Routine to read controller data and upload to $15-$18. Part of NMI.
     LDA.W HW_CNTRL1                           ;\\  
     AND.B #!ButA|!ButX|!ButL|!ButR            ;|| Get controller 1 data 2.
@@ -823,6 +829,8 @@ ControllerUpdate:                             ; Routine to read controller data 
     AND.W byetudlrP1Hold                      ;||
     STA.W byetudlrP1Frame                     ;||
     STY.W byetudlrP1Mask                      ;//
+    LDA.b !IsTwoPlayerGame
+    BNE NotTwoPlayerGame
     LDA.W HW_CNTRL2                           ;\\ 
     AND.B #!ButA|!ButX|!ButL|!ButR            ;|| Get controller 2 data 2.
     STA.W axlr0000P2Hold                      ;|/

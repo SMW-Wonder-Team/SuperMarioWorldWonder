@@ -829,7 +829,7 @@ ControllerUpdate:                             ; Routine to read controller data 
     AND.W byetudlrP1Hold                      ;||
     STA.W byetudlrP1Frame                     ;||
     STY.W byetudlrP1Mask                      ;//
-    LDA.b !IsTwoPlayerGame
+    LDA.b IsTwoPlayerGame
     BNE NotTwoPlayerGame
     LDA.W HW_CNTRL2                           ;\\ 
     AND.B #!ButA|!ButX|!ButL|!ButR            ;|| Get controller 2 data 2.

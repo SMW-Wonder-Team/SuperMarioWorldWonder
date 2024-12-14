@@ -5,8 +5,10 @@ name: Build ROM
 on:
   push:
     branches:
-      - main  # Adjust to your preferred branch
+      - '*'
   pull_request:
+    branches:
+      - '*'
 
 jobs:
   run-patch:

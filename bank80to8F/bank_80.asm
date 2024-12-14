@@ -54,6 +54,7 @@ GameLoop:                                     ; Main game loop.
     BEQ GameLoop                              ;/
     CLI                                       ; Enable interrupts.
     INC.B TrueFrame                           ; Increment global frame counter.
+    JSR ControllerUpdate
     JSR RunGameMode                           ; Run the game.
 if !cpu_meter_dim_screen
         LDA #$0B
@@ -313,7 +314,7 @@ CODE_008237:                                  ;|
 CODE_00823D:                                  ;
     JSR LoadScrnImage                         ; Upload tilemap data from $12.
     JSR DoSomeSpriteDMA                       ; Upload OAM.
-  + JSR ControllerUpdate                      ; Get controller data.
+;  + JSR ControllerUpdate                      ; Get controller data.
 
 NotSpecialLevelNMI:                           ; All paths rejoin.
     LDA.B Layer1XPos                          ;\ 
@@ -397,7 +398,7 @@ CODE_0082E8:                                  ;|
   + JSR CODE_00A488                           ; Upload palette to CGRAM.
     JSR LoadScrnImage                         ; Upload tilemap data from $12.
     JSR DoSomeSpriteDMA                       ; Upload OAM.
-    JSR ControllerUpdate                      ; Get controller data.
+;    JSR ControllerUpdate                      ; Get controller data.
 
 Mode7Lagging:                                 ; Transfer various RAM mirrors to the registers
     LDA.B #!HW_BG_BG3Pri|!HW_BG_Mode1
@@ -829,8 +830,6 @@ ControllerUpdate:                             ; Routine to read controller data 
     AND.W byetudlrP1Hold                      ;||
     STA.W byetudlrP1Frame                     ;||
     STY.W byetudlrP1Mask                      ;//
-    LDA.b IsTwoPlayerGame
-    BNE NotTwoPlayerGame
     LDA.W HW_CNTRL2                           ;\\ 
     AND.B #!ButA|!ButX|!ButL|!ButR            ;|| Get controller 2 data 2.
     STA.W axlr0000P2Hold                      ;|/

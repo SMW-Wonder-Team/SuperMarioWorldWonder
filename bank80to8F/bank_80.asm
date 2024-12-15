@@ -54,7 +54,7 @@ GameLoop:                                     ; Main game loop.
     BEQ GameLoop                              ;/
     CLI                                       ; Enable interrupts.
     INC.B TrueFrame                           ; Increment global frame counter.
-    JSR ControllerUpdate
+    JSR ControllerUpdate                      ; Poll the controller inputs
     JSR RunGameMode                           ; Run the game.
 if !cpu_meter_dim_screen
         LDA #$0B
@@ -63,7 +63,7 @@ endif
    if !cpu_meter_have_star
     LDA $2137       ;   Prepare H/V-count data
     LDA $213D       ;   Get V-count data
-    STA $02ED
+    STA $02ED       
     LDA #!cpu_meter_star_tile
     STA $02EE
     LDA #!cpu_meter_star_props
@@ -307,35 +307,37 @@ CODE_008222:                                  ; On overworld.
     CPY.B #$4                                 ;|| Then skip down to controller updating.
     BCS CODE_008237                           ;||
     JSR CODE_00A529                           ;||
-;    BRA +                                     ;|/
+;    BRA +                                     ;|/ Don't get controller data here
 CODE_008237:                                  ;|
     JSR CODE_00A4E3                           ;| Upload overworld animated tile graphics and animated palettes.
     JSR MarioGFXDMA                           ;/ Handle DMA for the player/Yoshi/Podoboo tiles.
 CODE_00823D:                                  ;
     JSR LoadScrnImage                         ; Upload tilemap data from $12.
     JSR DoSomeSpriteDMA                       ; Upload OAM.
-;  + JSR ControllerUpdate                      ; Get controller data.
+;  + JSR ControllerUpdate                      ; Don't get controller data here.
 
 NotSpecialLevelNMI:                           ; All paths rejoin.
-    LDA.B Layer1XPos                          ;\ 
+    REP.B #$20
+    LDA.B Layer1XPos                          ;\  ; LDA Spam
     STA.W HW_BG1HOFS                          ;|
-    LDA.B Layer1XPos+1                        ;|
-    STA.W HW_BG1HOFS                          ;|
+;    LDA.B Layer1XPos+1                        ;|
+ ;   STA.W HW_BG1HOFS                          ;|
     LDA.B Layer1YPos                          ;|
     CLC                                       ;| Upload Layer 1's position.
     ADC.W ScreenShakeYOffset                  ;|
     STA.W HW_BG1VOFS                          ;|
-    LDA.B Layer1YPos+1                        ;|
-    ADC.W ScreenShakeYOffset+1                ;|
-    STA.W HW_BG1VOFS                          ;/
+;    LDA.B Layer1YPos+1                        ;|
+;    ADC.W ScreenShakeYOffset+1                ;|
+;    STA.W HW_BG1VOFS                          ;/
     LDA.B Layer2XPos                          ;\ 
     STA.W HW_BG2HOFS                          ;|
-    LDA.B Layer2XPos+1                        ;|
-    STA.W HW_BG2HOFS                          ;| Upload Layer 2's position.
+;    LDA.B Layer2XPos+1                        ;|
+;    STA.W HW_BG2HOFS                          ;| Upload Layer 2's position.
     LDA.B Layer2YPos                          ;|
     STA.W HW_BG2VOFS                          ;|
-    LDA.B Layer2YPos+1                        ;|
-    STA.W HW_BG2VOFS                          ;/
+;    LDA.B Layer2YPos+1                        ;|
+;    STA.W HW_BG2VOFS                          ;/
+    SEP.B #$20
     LDA.W IRQNMICommand
     BEQ CODE_008292
 SpecialLevelNMI:

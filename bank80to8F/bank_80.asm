@@ -317,7 +317,7 @@ CODE_00823D:                                  ;
 ;  + JSR ControllerUpdate                      ; Don't get controller data here.
 
 NotSpecialLevelNMI:                           ; All paths rejoin.
-    REP.B #$20
+;    REP.B #$20
     LDA.B Layer1XPos                          ;\  ; LDA Spam
     STA.W HW_BG1HOFS                          ;|
 ;    LDA.B Layer1XPos+1                        ;|
@@ -337,7 +337,7 @@ NotSpecialLevelNMI:                           ; All paths rejoin.
     STA.W HW_BG2VOFS                          ;|
 ;    LDA.B Layer2YPos+1                        ;|
 ;    STA.W HW_BG2VOFS                          ;/
-    SEP.B #$20
+;    SEP.B #$20
     LDA.W IRQNMICommand
     BEQ CODE_008292
 SpecialLevelNMI:

@@ -52,9 +52,9 @@ I_RESET_FastROM:
 GameLoop:                                     ; Main game loop.
     LDA.B LagFlag                             ;\ Wait for NMI before executing next frame.
     BEQ GameLoop                              ;/
+    JSL ControllerUpdate
     CLI                                       ; Enable interrupts.
     INC.B TrueFrame                           ; Increment global frame counter.
-    JSR ControllerUpdate
     JSR RunGameMode                           ; Run the game.
 if !cpu_meter_dim_screen
         LDA #$0B
@@ -314,7 +314,7 @@ CODE_008237:                                  ;|
 CODE_00823D:                                  ;
     JSR LoadScrnImage                         ; Upload tilemap data from $12.
     JSR DoSomeSpriteDMA                       ; Upload OAM.
-;  + JSR ControllerUpdate                      ; Get controller data.
+  + ;JSR ControllerUpdate                      ; Get controller data.
 
 NotSpecialLevelNMI:                           ; All paths rejoin.
     LDA.B Layer1XPos                          ;\ 
@@ -461,7 +461,7 @@ I_IRQ:                                        ; IRQ routine.
     PHP                                       ;\ Save A/X/Y/P/B
     REP #$30                                  ;| AXY->16
     PHA                                       ;|
-    PHX                                       ;|
+    PHX                                       ;|x
     PHY                                       ;|
     PHB                                       ;|
     PHK                                       ;|
@@ -471,7 +471,7 @@ I_IRQ:                                        ; IRQ routine.
     BPL ExitIRQ                               ; If "Timer IRQ" is clear, skip the next code block
     LDA.B #!HW_TIMEN_NMI|!HW_TIMEN_JoyRead
     LDY.W IRQNMICommand
-    BMI CODE_0083BA                           ; If Bit 7 (negative flag) is set, branch to a different IRQ mode
+    BMI CODE_0083BA                         ; If Bit 7 (negative flag) is set, branch to a different IRQ mode
 IRQNMIEnding:
     STA.W HW_NMITIMEN                         ; Enable NMI Interrupt and Automatic Joypad reading
     LDY.B #31
@@ -479,12 +479,12 @@ IRQNMIEnding:
     LDA.B Layer3XPos                          ;\ Adjust scroll settings for layer 3
     STA.W HW_BG3HOFS                          ;| Optimization: Fix LDA Spam
     REP.b #$30                                ;|
-;    LDA.B Layer3XPos+1                       ;|
-;    STA.W HW_BG3HOFS                         ;|
+    LDA.B Layer3XPos+1                       ;|
+    STA.W HW_BG3HOFS                         ;|
     LDA.B Layer3YPos                          ;|
     STA.W HW_BG3VOFS                          ;|
-;    LDA.B Layer3YPos+1                       ;|
-;   STA.W HW_BG3VOFS                          ;|
+    LDA.B Layer3YPos+1                       ;|
+    STA.W HW_BG3VOFS                          ;|
     SEP.b #$30                                ;/
 CODE_0083A8:
     LDA.B MainBGMode                          ;\ Set the layer BG sizes, L3 priority, and BG mode
@@ -550,12 +550,12 @@ SETL1SCROLL:
     STA.W HW_BG1SC
     LDA.B #VRam_L1Mode7Tiles>>12
     STA.W HW_BG12NBA
-    REP.b #$20
+;    REP.b #$20
     LDA.B Layer1XPos
     STA.W HW_BG1HOFS
-;    LDA.B Layer1XPos+1 ; Optimization: Removed more LDA Spam
-;    STA.W HW_BG1HOFS
-    SEP.b #$20
+    LDA.B Layer1XPos+1 ; Optimization: Removed more LDA Spam
+    STA.W HW_BG1HOFS
+;    SEP.b #$20
     LDA.B Layer1YPos
     CLC
     ADC.W ScreenShakeYOffset

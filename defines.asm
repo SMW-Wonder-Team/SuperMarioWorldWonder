@@ -1,3 +1,4 @@
+; Wall Kick Stuff
 !no_back_time		= $10		; The time to disable moving back after a wall kick. The smaller the value, the higher the control of the player over Mario's movement while wall jumping, but it also makes it harder to do big wall jumps.
 !kick_x_speed		= $20		; The wall kick X speed.
 !kick_y_speed		= $B8		; The wall kick Y speed.
@@ -14,6 +15,8 @@
 !WallKickFlags			= $0DC3	; The wallkick flags. (RAM)
 !WallKick_no_back_timer		= $0DC4	; The timer for not moving back. (RAM)
 !WallKick_temp_y_spd		= $0DC5	; The temporary Y speed. (RAM)
+
+; Ground Pound Stuff
 !GPButton = !L
 
 ;Button used to cancel out of ground pound
@@ -35,6 +38,7 @@
 !GroundPndFlag = $1869	;also acts like speed container for faster fall. RAM reusin' rules
 !GroundPndTimer = $186A	;how long to stay in air after pressing trigger button. also used for delay before player can re-activate ground pound again.
 
+; CPU Meter
 !cpu_meter_dim_screen     = 0
 !cpu_meter_have_star      = 1
 
@@ -42,6 +46,10 @@
 !cpu_meter_star_tile      = $EF
 !cpu_meter_star_props     = %00110100
 
+;Thwomps
+!ThwompSmokeTimer = $1B		;How many frames the smoke effect lasts
+
+;Button Events
 !Up = $01;%00000001
 !Down = $02;%00000010
 !L = $04;%00000100

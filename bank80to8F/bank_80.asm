@@ -1104,10 +1104,10 @@ UploadL2Map16Strip:                           ; Done with Layer 1.
     LDA.B #0                                  ;\ Clear update flag for Layer 1.
     STA.W Layer1VramAddr                      ;/ 
     LDA.W Layer2VramAddr                      ;\ If $1CE6 is non-zero, update Layer 2.
-    BNE +                                     ;/
+    BNE UploadL2Map16StripScreenMode          ;/
     JMP FinishUploadMap16Strip                ; Else, return.
-
-  + LDA.B ScreenMode                          ;\ Need to update Layer 2.
+UploadL2Map16StripScreenMode:
+    LDA.B ScreenMode                          ;\ Need to update Layer 2.
     AND.B #!ScrMode_Layer2Vert                ;| Jump down if in a vertical level.
     BEQ UploadOneL2Column                     ;|
     JMP UploadOneL2Row                        ;/

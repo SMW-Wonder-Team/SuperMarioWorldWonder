@@ -21,7 +21,7 @@ UploadBGData:
 	BCC +
 
 ;ending crap
-	JSL $0087AD	;oiriginal enemies original uploader
+	JSL UploadL2Map16StripScreenMode	;oiriginal enemies original uploader
 
 	PLP
 	RTL
@@ -60,7 +60,7 @@ L1Load_Hack:
 	LDX $0100	;ending must rely on its own thing
 	CPX #$20
 	BCC +
-	JML $0588EC	;original loader
+	JML CODE_0588EC	;original loader
 	
 +	LDA $1925
 	JSL !ExecutePtrLong
@@ -107,7 +107,7 @@ L2Load_Hack:
 	LDX $0100	;ending must rely on its own thing
 	CPX #$20
 	BCC +
-	JML $058955	;original loader
+	JML CODE_058955	;original loader
 
 + 	LDA $1925               
 	JSL !ExecutePtrLong  
@@ -115,33 +115,33 @@ L2Load_Hack:
 dl Init_BG2	;horizontal level with image BG2
 dl Init_L2Horz	;horizontal level with level BG2
 dl Init_L2Horz	;horizontal level with level BG2
-dl $058B8D	;no
-dl $058B8D	;no
-dl $058C71	;no
-dl $058C71	;no
+dl CODE_058B8D	;no
+dl CODE_058B8D	;no
+dl CODE_058C71	;no
+dl CODE_058C71	;no
 dl Init_L2Vert	;vertical level with level BG2
 dl Init_L2Vert	;vertical level with level BG2
-dl $058C70	;horizontal boss level
+dl Return058C70	;horizontal boss level
 dl Init_BG2	;vertical level with image BG2
-dl $058C70	;horizontal boss level
+dl Return058C70	;horizontal boss level
 dl Init_BG2	;horizontal level with image BG2
 dl Init_BG2	;vertical level with image BG2
 dl Init_BG2	;horizontal level with image BG2
 dl Init_L2Horz	;horizontal level with level BG2
-dl $058C70	;$10
+dl Return058C70	;$10
 dl Init_BG2	;horizontal level with image BG2
-dl $058C70
-dl $058C70 
-dl $058C70 
-dl $058C70 
-dl $058C70 
-dl $058C70 
-dl $058C70 
-dl $058C70 
-dl $058C70 
-dl $058C70 
-dl $058C70 
-dl $058C70 
+dl Return058C70
+dl Return058C70
+dl Return058C70
+dl Return058C70
+dl Return058C70
+dl Return058C70
+dl Return058C70
+dl Return058C70
+dl Return058C70
+dl Return058C70
+dl Return058C70
+dl Return058C70
 dl Init_BG2	;horizontal level with image BG2
 dl Init_L2Horz	;horizontal level with level BG2
 
@@ -1473,8 +1473,8 @@ StorePreviousScroll:
 	BPL -
 
 	PLA		;...and restore it
-	JML $00F6EA	;back to SMW
-
+;	JML $00F6EA	;back to SMW
+	RTL
 ;calculate scroll direction based on (expected to be) current values and previous values
 ;---------------------------------------------------------------------------------------
 
@@ -1508,8 +1508,8 @@ CalculateScrollDirection:	;this MUST run after all changes to the scroll values 
 	BPL -
 
 	PLP
-	JML $00F7F2	;back to SMW
-
+;	JML $00F7F2	;back to SMW
+RTL
 ;sets the last updated scroll addresses to FFFF (force update)
 ;-------------------------------------------------------------
 
@@ -1527,8 +1527,8 @@ InitLastUpdates:
 	STA !L1x_direction
 	STA !L2x_direction
 
-	JML $0580AD	;back to SMW
-
+;	JML $0580AD	;back to SMW
+RTL
 ;checks layers for possible updates, updates if necessary
 ;--------------------------------------------------------
 
@@ -1543,8 +1543,8 @@ CheckLayerUpdates:
 
 ;ending, don't deviate from original code
 	LDA $5B			;restoring code..
-	JML $0586FB		;back to SMW
-
+;	JML $0586FB		;back to SMW
+RTL
 ;L1 x axis
 +	LDA.l !L1x_direction	;test x first..
 	TAX
@@ -1619,8 +1619,8 @@ CheckLayerUpdates:
 	PLP
 
 .return
-	JML $058774	;back to SMW
-
+;	JML $058774	;back to SMW
+RTL
 ;-----
 
 CalculateVRAML1R:

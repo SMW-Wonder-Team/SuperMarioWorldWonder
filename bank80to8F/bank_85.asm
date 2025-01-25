@@ -98,7 +98,7 @@ endif                                         ;/================================
     STZ.W LevelLoadObject                     ; Zero a byte in the middle of the RAM table for the level header
     REP #$30                                  ; AXY->16
     LDA.W #$FFFF
-    STA.B Layer1PrevTileUp                    ; $4D to $50 = #$FF
+	JML InitLastUpdates
     STA.B Layer1PrevTileDown
     JSR CODE_05877E                           ; -> here
     LDA.B Layer1TileUp
@@ -815,7 +815,8 @@ CODE_0586F1:
     PHP
     REP #$30                                  ; AXY->16
     JSR CODE_05877E
-    SEP #$20                                  ; A->8
+    JML CheckLayerUpdates
+;    SEP #$20                                  ; A->8
     LDA.B ScreenMode
     AND.B #!ScrMode_Layer1Vert
     BNE CODE_058713
@@ -1720,7 +1721,6 @@ CODE_058D7A:
     PLP
     RTL
 
-    %insert_empty($1E7,$1E7,$1E7,$1E7,$1C2)
 
 Layer3Ptr:
     dl Tilemap_L3Tide

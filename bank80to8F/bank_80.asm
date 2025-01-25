@@ -13679,7 +13679,9 @@ UpdateScreenPosition:
     REP #$20                                  ; A->16
     LDA.W CameraMoveTrigger
     SEC
-    SBC.W #$000C
+    ;VRAM Patch Hijack
+    JML StorePreviousScroll
+    ;SBC.W #$000C
     STA.W CameraLeftBuffer
     CLC
     ADC.W #$0018
@@ -13809,7 +13811,9 @@ CODE_00F7C2:
     SEC
     SBC.W NextLayer2YPos
     STA.W Layer2DYPos
-    LDX.B #$07
+    ;VRAM Patch Hijack
+	JML CalculateScrollDirection
+;    LDX.B #$07
   - LDA.B Layer1XPos,X
     STA.W NextLayer1XPos,X
     DEX

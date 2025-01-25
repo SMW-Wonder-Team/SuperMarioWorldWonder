@@ -1352,7 +1352,7 @@ Update_BG2Y:
 
 ;	LDA $058DA2		;map16 tilemap data location in ROM...changes with hack!
 ;	STA $0A
-	JSL $0EFD00		;LM 1.67, get BG Map16 pointer
+	JSL GetBGMap16Page		;LM 1.67, get BG Map16 pointer
 	LDA $0A			;
 	INC A			;each pointer below is offset by 2 bytes to avoid the constant double INY
 	INC A

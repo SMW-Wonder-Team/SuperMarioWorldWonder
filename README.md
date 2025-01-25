@@ -1,4 +1,5 @@
 # SMW-Wonder
+## Modifications licensed under the GPLv3
 Hack of Super Mario World (1990
 Fully open source and licensed under the GPLv3.
 Basing your hack off this repo requires compliance with this license

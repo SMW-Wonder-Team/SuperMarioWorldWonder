@@ -136,3 +136,8 @@
 
 !ExecutePtrLong		= ExecutePtrLong
 !LM_GetMap16Pointer 	= CODE_06F540
+
+!screen_rows = 32	;how high in tile rows + 2 either direction
+
+!screen_y	= $09	;unused DP RAM
+!block_y	= $0B

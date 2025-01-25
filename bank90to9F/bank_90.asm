@@ -1,4 +1,63 @@
 org $908000
+UploadBufferHack:
+	SEP #$20	;not gameplay mode?return right away then
+	LDA $0100
+	CMP #$07	;title screen gameplay
+	BEQ .adjustment
+	CMP #$14	;main level gameplay
+	BEQ .adjustment
+
+	REP #$20
+	LDA $03		;restored code
+;	JML $008755	;the place right after the hook was added
+	RTL
+
+;gameplay, test destination
+.adjustment
+	REP #$20
+	LDA $03			;load destination VRAM address already calculated by upload code
+;L1 check, possibly adjust
+	%uploadbuffercheck($2000, $3000, !L1yScroll)	;original at $2000, new one at $3000
+;L2 check, possibly adjust
+	%uploadbuffercheck($3000, $3800, !L2yScroll)	;original at $3000, new one at $3800
+
+.changenothing	
+	LDA $03		;the bottom out case, do not do anything
+	JML $008755
+
+.cancelupload
+	REP #$20	;get that stuff off stack
+;get next offset, this transfer is to be cancelled
+	LDA $05		;RLE flag, either displace by 'size' byte or by 2
+	BEQ .norle
+;rle
+	INY		;4 bytes, 2 for the data, 2 for the (unused) size field		
+	INY
+	INY
+	INY
+	SEP #$20
+;	JML $008726
+RTL
+
+.norle
+	LDA [$00],y	;Y is still perfectly valid
+	INY		;skip past size bytes
+	INY
+	XBA
+	AND #$3FFF	;here's the size of attempted transfer
+	INC A		;it was size -1
+	STA $03		;free RAM, no longer holds valid address
+	TYA
+	CLC
+	ADC $03		;advance by 'size' bytes
+	TAY
+
+	SEP #$20
+;	JML $008726	;back to SMW at the place it reads the first header word
+
+;routine that uploads data to tilemap in VRAM
+;--------------------------------------------
+
 UploadBGData:
 	PHP
 
@@ -1512,7 +1571,42 @@ CalculateScrollDirection:	;this MUST run after all changes to the scroll values 
 RTL
 ;sets the last updated scroll addresses to FFFF (force update)
 ;-------------------------------------------------------------
+ScreenSetupHack:
+	STZ $143A	;-restored code-
 
+	JSR CustomScreenSetup
+	RTL
+CustomScreenSetup:
+;custom version of SetUpScreen
+	STZ $2133               ; Set "Screen Initial Settings" to x00 ; Screen Initial Settings
+	STZ $2106               ; Turn off mosaic ; Mosaic Size and BG Enable
+
+	;LDA #$23         
+	LDA #$31	;$3000 and 64x32 tilemap       
+	STA $2107               ; BG 1 Address and Size
+	;LDA #$33	;original value for BG2
+	LDA #$39	;$3800 and 64x32 tilemap   
+	STA $2108               ; ; BG 2 Address and Size
+
+	LDA #$53                
+	STA $2109               ; BG 3 Address and Size
+	LDA #$00                
+	STA $210B               ; BG 1 & 2 Tile Data Designation
+	LDA #$04                
+	STA $210C               ; BG 3 & 4 Tile Data Designation
+	STZ $41                   
+	STZ $42                   
+	STZ $43                   
+	STZ $212A               ; BG 1, 2, 3 and 4 Window Logic Settings
+	STZ $212B               ; Color and OBJ Window Logic Settings
+	STZ $212E               ; Window Mask Designation for Main Screen
+	STZ $212F               ; Window Mask Designation for Sub Screen
+	LDA #$02                
+	STA $44                   
+	LDA #$80                ; \ Set Mode7 "Screen Over" to %10000000, disable Mode7 flipping 
+	STA $211A               ; /  ; Initial Setting for Mode 7
+
+	RTS
 InitLastUpdates:
 	STA $4D	;restored code
 	STA $4F

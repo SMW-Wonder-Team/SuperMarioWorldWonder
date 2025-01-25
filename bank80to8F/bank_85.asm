@@ -7399,6 +7399,7 @@ CODE_05D8B7:
   + LDA.B #$01
     STA.W VertLayer1Setting
 CODE_05DA17:
+;    JSL LMBGSettings
     SEP #$30                                  ; AXY->8
     LDA.W TranslevelNo
     CMP.B #$52
@@ -9744,3 +9745,6 @@ DATA_05FE00:
     db $00,$00,$00,$00,$00,$00,$00,$02
     db $00,$00,$00,$00,$00,$03,$00,$02
     db $03,$00,$00,$00,$00,$03,$00,$00
+
+org $85fffe
+nop

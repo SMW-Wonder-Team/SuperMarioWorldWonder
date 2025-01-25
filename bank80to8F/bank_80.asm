@@ -2281,6 +2281,7 @@ GM00LoadPresents:                             ; Game Mode 00 - Load Nintendo Pre
 	STA $211A               ; /  ; Initial Setting for Mode 7
 ;    JSR BetterSetupScreen
 ;    JSR SetUpScreen                           ; VRAM patch #2
+	JML ScreenSetupHack
     JSR CODE_00A993                           ; Load Layer 3 GFX.
     LDY.B #4*(4-1)                            ;\ Load Nintendo Presents logo
     LDX.B #4-1                                ;|
@@ -7496,8 +7497,9 @@ CODE_00C0C4:
     STA.B [Map16HighPtr],Y                    ; /
     LDA.L TileToGeneratePg1,X                 ; \ Store tile
     STA.B [Map16LowPtr],Y                     ; /
-    REP #$20                                  ; A->16
-    AND.W #$00FF
+;    REP #$20                                  ; A->16
+;    AND.W #$00FF
+    JML UploadBufferHack
     ORA.W #$0100
     ASL A
     TAY

@@ -2252,36 +2252,8 @@ NintendoTile:                                 ; Tilemap for the "Nintendo Presen
 
 GM00LoadPresents:                             ; Game Mode 00 - Load Nintendo Presents
     JSR ClearOutLayer3                        ; Clean out Layer 3.
-    STZ $2133               ; Set "Screen Initial Settings" to x00 ; Screen Initial Settings
-	STZ $2106               ; Turn off mosaic ; Mosaic Size and BG Enable
-
-	;LDA #$23         
-	LDA #$31	;$3000 and 64x32 tilemap       
-	STA $2107               ; BG 1 Address and Size
-	;LDA #$33	;original value for BG2
-	LDA #$39	;$3800 and 64x32 tilemap   
-	STA $2108               ; ; BG 2 Address and Size
-
-	LDA #$53                
-	STA $2109               ; BG 3 Address and Size
-	LDA #$00                
-	STA $210B               ; BG 1 & 2 Tile Data Designation
-	LDA #$04                
-	STA $210C               ; BG 3 & 4 Tile Data Designation
-	STZ $41                   
-	STZ $42                   
-	STZ $43                   
-	STZ $212A               ; BG 1, 2, 3 and 4 Window Logic Settings
-	STZ $212B               ; Color and OBJ Window Logic Settings
-	STZ $212E               ; Window Mask Designation for Main Screen
-	STZ $212F               ; Window Mask Designation for Sub Screen
-	LDA #$02                
-	STA $44                   
-	LDA #$80                ; \ Set Mode7 "Screen Over" to %10000000, disable Mode7 flipping 
-	STA $211A               ; /  ; Initial Setting for Mode 7
-;    JSR BetterSetupScreen
-;    JSR SetUpScreen                           ; VRAM patch #2
-	JML ScreenSetupHack
+    JSR SetUpScreen                           ; VRAM patch #2
+;	JML ScreenSetupHack
     JSR CODE_00A993                           ; Load Layer 3 GFX.
     LDY.B #4*(4-1)                            ;\ Load Nintendo Presents logo
     LDX.B #4-1                                ;|
@@ -4898,7 +4870,8 @@ GM12PrepLevel:
     JSR ClearOutLayer3                        ; gah, stupid keyboard >_<
     JSR NoButtons
     STZ.W UploadMarioStart
-    JSR SetUpScreen
+;    JSR SetUpScreen
+    JML ScreenSetupHack
     JSR UploadStaticBar
     JSL CODE_05809E                           ; ->here
     LDA.W IRQNMICommand

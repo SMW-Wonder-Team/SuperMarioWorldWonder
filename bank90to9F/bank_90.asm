@@ -1531,8 +1531,8 @@ StorePreviousScroll:
 	BPL -
 
 	PLA		;...and restore it
-;	JML $00F6EA	;back to SMW
-	RTL
+	JML UpdateScreenPosition2	;back to SMW
+;	RTL
 ;calculate scroll direction based on (expected to be) current values and previous values
 ;---------------------------------------------------------------------------------------
 
@@ -1567,7 +1567,7 @@ CalculateScrollDirection:	;this MUST run after all changes to the scroll values 
 
 	PLP
 ;	JML $00F7F2	;back to SMW
-RTL
+	PLB : RTL
 ;sets the last updated scroll addresses to FFFF (force update)
 ;-------------------------------------------------------------
 ScreenSetupHack:
@@ -1620,7 +1620,7 @@ InitLastUpdates:
 	STA !L1x_direction
 	STA !L2x_direction
 
-;	JML $0580AD	;back to SMW
+	JML CODE_05877E	;back to SMW
 RTL
 ;checks layers for possible updates, updates if necessary
 ;--------------------------------------------------------
@@ -1636,7 +1636,7 @@ CheckLayerUpdates:
 
 ;ending, don't deviate from original code
 	LDA $5B			;restoring code..
-;	JML $0586FB		;back to SMW
+	JML $0586FB		;back to SMW
 RTL
 ;L1 x axis
 +	LDA.l !L1x_direction	;test x first..

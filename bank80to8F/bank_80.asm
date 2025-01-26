@@ -4869,7 +4869,7 @@ CODE_00A594:
 GM12PrepLevel:
     JSR ClearOutLayer3                        ; gah, stupid keyboard >_<
     JSR NoButtons
-    STZ.W UploadMarioStart
+;    STZ.W UploadMarioStart
 ;    JSR SetUpScreen
     JML ScreenSetupHack
     JSR UploadStaticBar
@@ -13658,6 +13658,7 @@ UpdateScreenPosition:
     JML StorePreviousScroll
     ;SBC.W #$000C
     STA.W CameraLeftBuffer
+UpdateScreenPosition2:
     CLC
     ADC.W #$0018
     STA.W CameraRightBuffer

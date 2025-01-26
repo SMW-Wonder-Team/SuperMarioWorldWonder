@@ -23,8 +23,8 @@ UploadBufferHack:
 
 .changenothing	
 	LDA $03		;the bottom out case, do not do anything
-	JML $008755
-
+;	JML $008755
+	JML LoadStripeImage
 .cancelupload
 	REP #$20	;get that stuff off stack
 ;get next offset, this transfer is to be cancelled
@@ -1636,8 +1636,8 @@ CheckLayerUpdates:
 
 ;ending, don't deviate from original code
 	LDA $5B			;restoring code..
-	JML $0586FB		;back to SMW
-RTL
+	JML CODE_0586F1_Part2		;back to SMW
+;TL
 ;L1 x axis
 +	LDA.l !L1x_direction	;test x first..
 	TAX
@@ -1712,8 +1712,8 @@ RTL
 	PLP
 
 .return
-;	JML $058774	;back to SMW
-RTL
+	JML CODE_058774	;back to SMW
+
 ;-----
 
 CalculateVRAML1R:

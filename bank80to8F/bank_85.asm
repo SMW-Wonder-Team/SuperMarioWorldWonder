@@ -818,6 +818,8 @@ CODE_0586F1:
     JML CheckLayerUpdates
 ;    SEP #$20                                  ; A->8
     LDA.B ScreenMode
+;    BRA.b CODE_0586F1_Part2
+CODE_0586F1_Part2:
     AND.B #!ScrMode_Layer1Vert
     BNE CODE_058713
     REP #$20                                  ; A->16

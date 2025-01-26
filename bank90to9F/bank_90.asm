@@ -36,8 +36,7 @@ UploadBufferHack:
 	INY
 	INY
 	SEP #$20
-;	JML $008726
-RTL
+	JML LoadStripeImage
 
 .norle
 	LDA [$00],y	;Y is still perfectly valid
@@ -53,7 +52,7 @@ RTL
 	TAY
 
 	SEP #$20
-;	JML $008726	;back to SMW at the place it reads the first header word
+	JML LoadStripeImage	;back to SMW at the place it reads the first header word
 
 ;routine that uploads data to tilemap in VRAM
 ;--------------------------------------------

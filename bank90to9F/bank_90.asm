@@ -1621,7 +1621,7 @@ InitLastUpdates:
 	STA !L1x_direction
 	STA !L2x_direction
 
-	JML CODE_05877E	;back to SMW
+	JML ReturnInitLastUpdates	;back to SMW
 RTL
 ;checks layers for possible updates, updates if necessary
 ;--------------------------------------------------------

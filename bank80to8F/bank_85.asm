@@ -100,6 +100,7 @@ endif                                         ;/================================
     LDA.W #$FFFF
 	JML InitLastUpdates
     STA.B Layer1PrevTileDown
+ReturnInitLastUpdates:
     JSR CODE_05877E                           ; -> here
     LDA.B Layer1TileUp
     STA.B Layer1TileDown

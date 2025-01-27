@@ -1574,7 +1574,8 @@ ScreenSetupHack:
 	STZ $143A	;-restored code-
 
 	JSR CustomScreenSetup
-	RTL
+
+	JML AfterScreenSetup
 CustomScreenSetup:
 ;custom version of SetUpScreen
 	STZ $2133               ; Set "Screen Initial Settings" to x00 ; Screen Initial Settings

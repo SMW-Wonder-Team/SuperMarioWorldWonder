@@ -4872,6 +4872,7 @@ GM12PrepLevel:
 ;    STZ.W UploadMarioStart
 ;    JSR SetUpScreen
     JML ScreenSetupHack
+AfterScreenSetup:
     JSR UploadStaticBar
     JSL CODE_05809E                           ; ->here
     LDA.W IRQNMICommand

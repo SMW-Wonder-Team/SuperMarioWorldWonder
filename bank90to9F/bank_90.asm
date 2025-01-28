@@ -24,7 +24,7 @@ UploadBufferHack:
 .changenothing	
 	LDA $03		;the bottom out case, do not do anything
 ;	JML $008755
-	JML LoadStripeImage
+	JML JumpFromInitLastUpdatesBecauseAsarIsVeryStupid
 .cancelupload
 	REP #$20	;get that stuff off stack
 ;get next offset, this transfer is to be cancelled

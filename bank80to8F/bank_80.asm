@@ -924,8 +924,10 @@ LoadStripeImage:                              ; Subroutine to upload a specific 
     ORA.B #!HW_DMA_2Byte2Addr                 ;|
     STA.W HW_DMAPARAM+$10                     ;/
     REP #$20                                  ; A->16
-    LDA.B _3                                  ;\ Set destination.
-    STA.W HW_VMADD                            ;/
+    LDA.B _3                                  ;\ Set destination. 
+    BRA.b JumpFromInitLastUpdatesBecauseAsarIsVeryStupid
+JumpFromInitLastUpdatesBecauseAsarIsVeryStupid:
+    STA.W HW_VMADD                            ;/ ;Jump mere from InitLastUpdaes
     LDA.B [_0],Y                              ;\ 
     XBA                                       ;|
     AND.W #%0011111111111111                  ;|

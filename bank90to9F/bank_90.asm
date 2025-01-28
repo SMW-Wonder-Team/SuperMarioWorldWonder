@@ -9,8 +9,8 @@ UploadBufferHack:
 
 	REP #$20
 	LDA $03		;restored code
-;	JML $008755	;the place right after the hook was added
-	RTL
+	JML AfterUploadBufferHack	;the place right after the hook was added
+;	RTL
 
 ;gameplay, test destination
 .adjustment
@@ -36,7 +36,7 @@ UploadBufferHack:
 	INY
 	INY
 	SEP #$20
-	JML LoadStripeImage
+	JML LoadStripeImage2
 
 .norle
 	LDA [$00],y	;Y is still perfectly valid

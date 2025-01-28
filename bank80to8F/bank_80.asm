@@ -7478,6 +7478,7 @@ CODE_00C0C4:
 ;    REP #$20                                  ; A->16
 ;    AND.W #$00FF
     JML UploadBufferHack
+AfterUploadBufferHack:
     ORA.W #$0100
     ASL A
     TAY

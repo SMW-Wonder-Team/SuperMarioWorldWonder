@@ -24,7 +24,7 @@ UploadBufferHack:
 .changenothing	
 	LDA $03		;the bottom out case, do not do anything
 ;	JML $008755
-	JML JumpFromInitLastUpdatesBecauseAsarIsVeryStupid
+	JML LoadStripeImage1
 .cancelupload
 	REP #$20	;get that stuff off stack
 ;get next offset, this transfer is to be cancelled
@@ -52,7 +52,7 @@ UploadBufferHack:
 	TAY
 
 	SEP #$20
-	JML LoadStripeImage	;back to SMW at the place it reads the first header word
+	JML LoadStripeImage2	;back to SMW at the place it reads the first header word
 
 ;routine that uploads data to tilemap in VRAM
 ;--------------------------------------------

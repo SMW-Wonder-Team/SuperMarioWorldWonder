@@ -925,8 +925,8 @@ LoadStripeImage:                              ; Subroutine to upload a specific 
     STA.W HW_DMAPARAM+$10                     ;/
     REP #$20                                  ; A->16
     LDA.B _3                                  ;\ Set destination. 
-    BRA.b JumpFromInitLastUpdatesBecauseAsarIsVeryStupid
-JumpFromInitLastUpdatesBecauseAsarIsVeryStupid:
+    BRA.b LoadStripeImage1
+LoadStripeImage1:
     STA.W HW_VMADD                            ;/ ;Jump mere from InitLastUpdaes
     LDA.B [_0],Y                              ;\ 
     XBA                                       ;|
@@ -968,6 +968,8 @@ JumpFromInitLastUpdatesBecauseAsarIsVeryStupid:
     STA.W HW_VMAINC                           ;/
     LDA.B #!Ch1                               ;\ Enable DMA on channel 1.
     STA.W HW_MDMAEN                           ;/
+    BRA.b LoadStripeImage2
+LoadStripeImage2:
     JMP -                                     ;
 
 UploadOneMap16Strip:                          ; DMA routine to upload one row/column of Map16 data to VRAM for Layer 1/2.

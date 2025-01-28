@@ -7475,9 +7475,10 @@ CODE_00C0C4:
     STA.B [Map16HighPtr],Y                    ; /
     LDA.L TileToGeneratePg1,X                 ; \ Store tile
     STA.B [Map16LowPtr],Y                     ; /
-;    REP #$20                                  ; A->16
-;    AND.W #$00FF
-    JML UploadBufferHack
+    REP #$20                                  ; A->16
+    AND.W #$00FF
+;    JML UploadBufferHack
+    BRA.b AfterUploadBufferHack
 AfterUploadBufferHack:
     ORA.W #$0100
     ASL A

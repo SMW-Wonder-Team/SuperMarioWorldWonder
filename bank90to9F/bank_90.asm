@@ -1220,9 +1220,9 @@ CalculateBasePointerL1:
 	AND.w #$00FF
 	ASL
 	TAX
-	LDA $00BDA8,x  	;for map16 lo
+	LDA Ptrs00BDA8,x  	;for map16 lo
 	STA $0A
-	LDA $00BE28,x 	;for map16 hi
+	LDA Ptrs00BE28,x 	;for map16 hi
 	STA $0D
 	SEP #$20
 	LDA.b #$00  ;LM 1.70, bank is 00 for SMW, 30 for SMAS+W
@@ -1251,9 +1251,9 @@ CalculateBasePointerL2:
 	AND.w #$00FF
 	ASL
 	TAX
-	LDA $00BDE8,x  	;for map16 lo      
+	LDA Ptrs00BDE8,x  	;for map16 lo      
 	STA $0A                   
-	LDA $00BE68,x 	;for map16 hi       
+	LDA Ptrs00BE68,x 	;for map16 hi       
 	STA $0D
 	SEP #$20
 	LDA.b #$00  ;LM 1.70, bank is 00 for SMW, 30 for SMAS+W

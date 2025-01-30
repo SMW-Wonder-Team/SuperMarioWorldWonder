@@ -5,7 +5,6 @@
 lorom
 math pri on
 incsrc "constants.asm"
-incsrc "defines.asm"
 incsrc "macros.asm"
 incsrc "rammap.asm"
 incsrc "customrammap.asm"

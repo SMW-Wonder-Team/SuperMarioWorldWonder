@@ -424,7 +424,7 @@ label_06F5B9:			; Tile is on page 0/1.
 	LDA #$0500			;|   $0B = 0x0D00
 	BRA label_06F5CA	;| Else (overworld),
 label_06F5C7:			;|   $0B = 0x0500
-	LDA #$0D00			;|
+	LDA #Map16Common			;|
 label_06F5CA:			;| Essentially this determines whether to use the tables at $0D8000, or at $05D000.
 	STA $0B				;/
 	LDA $0FBE,Y

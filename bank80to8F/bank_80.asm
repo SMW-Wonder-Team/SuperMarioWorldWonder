@@ -48,13 +48,13 @@ I_RESET_FastROM:
     LDA.B #(VRam_OBJTiles>>13)|!HW_OBJ_Size_8_16
     STA.W HW_OBJSEL                           ; Set OAM character sizes to be 8x8 and 16x16.
     INC.B LagFlag                             ;
-
 GameLoop:                                     ; Main game loop.
     LDA.B LagFlag                             ;\ Wait for NMI before executing next frame.
     BEQ GameLoop                              ;/
     CLI                                       ; Enable interrupts.
     INC.B TrueFrame                           ; Increment global frame counter.
     JSR RunGameMode                           ; Run the game.
+    JSR.w VRAMPatchStripeHijack
     STZ.B LagFlag                             ; Indicate that the current frame has finished.
     BRA GameLoop                              ;
 
@@ -122,7 +122,9 @@ SendSPCBlock:                                 ; Entry point for the SPC engine u
     STZ.W HW_APUIO3                           ;/
     PLP                                       ;
     RTS                                       ;
-
+VRAMPatchStripeHijack: ;Here because there is a rts above
+jsl vram
+rts
 UploadSPCEngine:                              ; Routine to upload the music engine to the SPC700 chip.
     LDA.B #SPC700Engine                       ;\ 
     %BorW(STA, _0)                            ;|
@@ -894,8 +896,6 @@ LoadStripeImage:                              ; Subroutine to upload a specific 
     STA.W HW_DMAPARAM+$10                     ;/
     REP #$20                                  ; A->16
     LDA.B _3                                  ;\ Set destination. 
-    BRA.b LoadStripeImage1
-LoadStripeImage1:
     STA.W HW_VMADD                            ;/ ;Jump mere from InitLastUpdaes
     LDA.B [_0],Y                              ;\ 
     XBA                                       ;|
@@ -937,8 +937,6 @@ LoadStripeImage1:
     STA.W HW_VMAINC                           ;/
     LDA.B #!Ch1                               ;\ Enable DMA on channel 1.
     STA.W HW_MDMAEN                           ;/
-    BRA.b LoadStripeImage2
-LoadStripeImage2:
     JMP -                                     ;
 
 UploadOneMap16Strip:                          ; DMA routine to upload one row/column of Map16 data to VRAM for Layer 1/2.

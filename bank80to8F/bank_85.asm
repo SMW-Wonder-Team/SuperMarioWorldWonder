@@ -8204,519 +8204,519 @@ Layer1Ptrs:
     dl YI4Sub2Level1FF
 
 Layer2Ptrs:
-    dw DATA_0CE674 : db $FF
-    dw DATA_0CDD44 : db $FF
-    dw DATA_0CDD44 : db $FF
-    dw DATA_0CEC82 : db $FF
-    dw DATA_0CEF80 : db $FF
-    dw DATA_0CEC82 : db $FF
-    dw DATA_0CDE54 : db $FF
-    dw DATA_0CF45A : db $FF
-    dw DATA_0CE674 : db $FF
+    dl DATA_0CE674
+    dl DATA_0CDD44
+    dl DATA_0CDD44
+    dl DATA_0CEC82
+    dl DATA_0CEF80
+    dl DATA_0CEC82
+    dl DATA_0CDE54
+    dl DATA_0CF45A
+    dl DATA_0CE674
     dl DP2LvlL2009
-    dw DATA_0CDAB9 : db $FF
-    dw DATA_0CF45A : db $FF
-    dw DATA_0CDD44 : db $FF
-    dw DATA_0CDD44 : db $FF
+    dl DATA_0CDAB9
+    dl DATA_0CF45A
+    dl DATA_0CDD44
+    dl DATA_0CDD44
     dl C4LvlL200E
-    dw DATA_0CDD44 : db $FF
-    dw DATA_0CDD44 : db $FF
-    dw DATA_0CDAB9 : db $FF
-    dw DATA_0CDE54 : db $FF
-    dw DATA_0CEF80 : db $FF
-    dw DATA_0CE674 : db $FF
-    dw DATA_0CDE54 : db $FF
-    dw DATA_0CDE54 : db $FF
-    dw DATA_0CD900 : db $FF
-    dw DATA_0CDAB9 : db $FF
-    dw DATA_0CD900 : db $FF
+    dl DATA_0CDD44
+    dl DATA_0CDD44
+    dl DATA_0CDAB9
+    dl DATA_0CDE54
+    dl DATA_0CEF80
+    dl DATA_0CE674
+    dl DATA_0CDE54
+    dl DATA_0CDE54
+    dl DATA_0CD900
+    dl DATA_0CDAB9
+    dl DATA_0CD900
     dl C6LvlL201A
-    dw DATA_0CF45A : db $FF
-    dw DATA_0CE7C0 : db $FF
-    dw DATA_0CE8FE : db $FF
-    dw DATA_0CD900 : db $FF
-    dw DATA_0CE103 : db $FF
-    dw DATA_0CF45A : db $FF
-    dw DATA_0CEF80 : db $FF
-    dw DATA_0CDE54 : db $FF
-    dw DATA_0CE7C0 : db $FF
-    dw DATA_0CDF59 : db $FF
-    dw DATA_0CD900 : db $FF
-    dw DATA_0CD900 : db $FF
-    dw DATA_0CD900 : db $FF
-    dw DATA_0CD900 : db $FF
-    dw DATA_0CD900 : db $FF
-    dw DATA_0CD900 : db $FF
-    dw DATA_0CD900 : db $FF
-    dw DATA_0CD900 : db $FF
-    dw DATA_0CD900 : db $FF
-    dw DATA_0CD900 : db $FF
-    dw DATA_0CD900 : db $FF
-    dw DATA_0CD900 : db $FF
-    dw DATA_0CD900 : db $FF
-    dw DATA_0CD900 : db $FF
-    dw DATA_0CD900 : db $FF
-    dw DATA_0CD900 : db $FF
-    dw DATA_0CD900 : db $FF
-    dw DATA_0CD900 : db $FF
-    dw DATA_0CD900 : db $FF
-    dw DATA_0CD900 : db $FF
-    dw DATA_0CD900 : db $FF
-    dw DATA_0CD900 : db $FF
-    dw DATA_0CD900 : db $FF
-    dw DATA_0CD900 : db $FF
-    dw DATA_0CD900 : db $FF
-    dw DATA_0CD900 : db $FF
-    dw DATA_0CD900 : db $FF
-    dw DATA_0CD900 : db $FF
-    dw DATA_0CD900 : db $FF
-    dw DATA_0CD900 : db $FF
-    dw DATA_0CD900 : db $FF
-    dw DATA_0CD900 : db $FF
-    dw DATA_0CD900 : db $FF
-    dw DATA_0CD900 : db $FF
-    dw DATA_0CD900 : db $FF
-    dw DATA_0CD900 : db $FF
-    dw DATA_0CD900 : db $FF
-    dw DATA_0CD900 : db $FF
-    dw DATA_0CD900 : db $FF
-    dw DATA_0CD900 : db $FF
-    dw DATA_0CD900 : db $FF
-    dw DATA_0CD900 : db $FF
-    dw DATA_0CD900 : db $FF
-    dw DATA_0CD900 : db $FF
-    dw DATA_0CD900 : db $FF
-    dw DATA_0CD900 : db $FF
-    dw DATA_0CD900 : db $FF
-    dw DATA_0CD900 : db $FF
-    dw DATA_0CD900 : db $FF
-    dw DATA_0CD900 : db $FF
-    dw DATA_0CD900 : db $FF
-    dw DATA_0CD900 : db $FF
-    dw DATA_0CD900 : db $FF
-    dw DATA_0CD900 : db $FF
-    dw DATA_0CD900 : db $FF
-    dw DATA_0CD900 : db $FF
-    dw DATA_0CD900 : db $FF
-    dw DATA_0CD900 : db $FF
-    dw DATA_0CD900 : db $FF
-    dw DATA_0CD900 : db $FF
-    dw DATA_0CD900 : db $FF
-    dw DATA_0CD900 : db $FF
-    dw DATA_0CD900 : db $FF
-    dw DATA_0CD900 : db $FF
-    dw DATA_0CD900 : db $FF
-    dw DATA_0CD900 : db $FF
-    dw DATA_0CD900 : db $FF
-    dw DATA_0CD900 : db $FF
-    dw DATA_0CD900 : db $FF
-    dw DATA_0CD900 : db $FF
-    dw DATA_0CD900 : db $FF
-    dw DATA_0CD900 : db $FF
-    dw DATA_0CD900 : db $FF
-    dw DATA_0CD900 : db $FF
-    dw DATA_0CD900 : db $FF
-    dw DATA_0CD900 : db $FF
-    dw DATA_0CD900 : db $FF
-    dw DATA_0CD900 : db $FF
-    dw DATA_0CD900 : db $FF
-    dw DATA_0CD900 : db $FF
-    dw DATA_0CD900 : db $FF
-    dw DATA_0CD900 : db $FF
-    dw DATA_0CD900 : db $FF
-    dw DATA_0CD900 : db $FF
-    dw DATA_0CD900 : db $FF
-    dw DATA_0CD900 : db $FF
-    dw DATA_0CD900 : db $FF
-    dw DATA_0CD900 : db $FF
-    dw DATA_0CD900 : db $FF
-    dw DATA_0CD900 : db $FF
-    dw DATA_0CD900 : db $FF
-    dw DATA_0CD900 : db $FF
-    dw DATA_0CD900 : db $FF
-    dw DATA_0CD900 : db $FF
-    dw DATA_0CD900 : db $FF
-    dw DATA_0CD900 : db $FF
-    dw DATA_0CD900 : db $FF
-    dw DATA_0CD900 : db $FF
-    dw DATA_0CD900 : db $FF
-    dw DATA_0CD900 : db $FF
-    dw DATA_0CD900 : db $FF
-    dw DATA_0CD900 : db $FF
-    dw DATA_0CD900 : db $FF
-    dw DATA_0CD900 : db $FF
-    dw DATA_0CD900 : db $FF
-    dw DATA_0CD900 : db $FF
-    dw DATA_0CD900 : db $FF
-    dw DATA_0CD900 : db $FF
-    dw DATA_0CD900 : db $FF
-    dw DATA_0CD900 : db $FF
-    dw DATA_0CF45A : db $FF
-    dw DATA_0CF45A : db $FF
-    dw DATA_0CF45A : db $FF
-    dw DATA_0CF45A : db $FF
-    dw DATA_0CF45A : db $FF
-    dw DATA_0CF45A : db $FF
-    dw DATA_0CF45A : db $FF
-    dw DATA_0CF45A : db $FF
-    dw DATA_0CF45A : db $FF
-    dw DATA_0CD900 : db $FF
-    dw DATA_0CD900 : db $FF
-    dw DATA_0CD900 : db $FF
-    dw DATA_0CD900 : db $FF
-    dw DATA_0CD900 : db $FF
-    dw DATA_0CD900 : db $FF
-    dw DATA_0CD900 : db $FF
-    dw DATA_0CD900 : db $FF
-    dw DATA_0CD900 : db $FF
-    dw DATA_0CD900 : db $FF
-    dw DATA_0CD900 : db $FF
-    dw DATA_0CD900 : db $FF
-    dw DATA_0CD900 : db $FF
-    dw DATA_0CD900 : db $FF
-    dw DATA_0CD900 : db $FF
-    dw DATA_0CD900 : db $FF
-    dw DATA_0CD900 : db $FF
-    dw DATA_0CD900 : db $FF
-    dw DATA_0CD900 : db $FF
-    dw DATA_0CD900 : db $FF
-    dw DATA_0CD900 : db $FF
-    dw DATA_0CD900 : db $FF
-    dw DATA_0CD900 : db $FF
-    dw DATA_0CD900 : db $FF
-    dw DATA_0CD900 : db $FF
-    dw DATA_0CD900 : db $FF
-    dw DATA_0CD900 : db $FF
-    dw DATA_0CD900 : db $FF
-    dw DATA_0CD900 : db $FF
-    dw DATA_0CD900 : db $FF
-    dw DATA_0CD900 : db $FF
-    dw DATA_0CD900 : db $FF
-    dw DATA_0CD900 : db $FF
-    dw DATA_0CE674 : db $FF
-    dw DATA_0CDF59 : db $FF
-    dw DATA_0CDD44 : db $FF
-    dw DATA_0CDF59 : db $FF
-    dw DATA_0CDF59 : db $FF
-    dw DATA_0CE8FE : db $FF
-    dw DATA_0CDE54 : db $FF
+    dl DATA_0CF45A
+    dl DATA_0CE7C0
+    dl DATA_0CE8FE
+    dl DATA_0CD900
+    dl DATA_0CE103
+    dl DATA_0CF45A
+    dl DATA_0CEF80
+    dl DATA_0CDE54
+    dl DATA_0CE7C0
+    dl DATA_0CDF59
+    dl DATA_0CD900
+    dl DATA_0CD900
+    dl DATA_0CD900
+    dl DATA_0CD900
+    dl DATA_0CD900
+    dl DATA_0CD900
+    dl DATA_0CD900
+    dl DATA_0CD900
+    dl DATA_0CD900
+    dl DATA_0CD900
+    dl DATA_0CD900
+    dl DATA_0CD900
+    dl DATA_0CD900
+    dl DATA_0CD900
+    dl DATA_0CD900
+    dl DATA_0CD900
+    dl DATA_0CD900
+    dl DATA_0CD900
+    dl DATA_0CD900
+    dl DATA_0CD900
+    dl DATA_0CD900
+    dl DATA_0CD900
+    dl DATA_0CD900
+    dl DATA_0CD900
+    dl DATA_0CD900
+    dl DATA_0CD900
+    dl DATA_0CD900
+    dl DATA_0CD900
+    dl DATA_0CD900
+    dl DATA_0CD900
+    dl DATA_0CD900
+    dl DATA_0CD900
+    dl DATA_0CD900
+    dl DATA_0CD900
+    dl DATA_0CD900
+    dl DATA_0CD900
+    dl DATA_0CD900
+    dl DATA_0CD900
+    dl DATA_0CD900
+    dl DATA_0CD900
+    dl DATA_0CD900
+    dl DATA_0CD900
+    dl DATA_0CD900
+    dl DATA_0CD900
+    dl DATA_0CD900
+    dl DATA_0CD900
+    dl DATA_0CD900
+    dl DATA_0CD900
+    dl DATA_0CD900
+    dl DATA_0CD900
+    dl DATA_0CD900
+    dl DATA_0CD900
+    dl DATA_0CD900
+    dl DATA_0CD900
+    dl DATA_0CD900
+    dl DATA_0CD900
+    dl DATA_0CD900
+    dl DATA_0CD900
+    dl DATA_0CD900
+    dl DATA_0CD900
+    dl DATA_0CD900
+    dl DATA_0CD900
+    dl DATA_0CD900
+    dl DATA_0CD900
+    dl DATA_0CD900
+    dl DATA_0CD900
+    dl DATA_0CD900
+    dl DATA_0CD900
+    dl DATA_0CD900
+    dl DATA_0CD900
+    dl DATA_0CD900
+    dl DATA_0CD900
+    dl DATA_0CD900
+    dl DATA_0CD900
+    dl DATA_0CD900
+    dl DATA_0CD900
+    dl DATA_0CD900
+    dl DATA_0CD900
+    dl DATA_0CD900
+    dl DATA_0CD900
+    dl DATA_0CD900
+    dl DATA_0CD900
+    dl DATA_0CD900
+    dl DATA_0CD900
+    dl DATA_0CD900
+    dl DATA_0CD900
+    dl DATA_0CD900
+    dl DATA_0CD900
+    dl DATA_0CD900
+    dl DATA_0CD900
+    dl DATA_0CD900
+    dl DATA_0CD900
+    dl DATA_0CD900
+    dl DATA_0CD900
+    dl DATA_0CD900
+    dl DATA_0CD900
+    dl DATA_0CD900
+    dl DATA_0CD900
+    dl DATA_0CD900
+    dl DATA_0CD900
+    dl DATA_0CD900
+    dl DATA_0CD900
+    dl DATA_0CD900
+    dl DATA_0CD900
+    dl DATA_0CD900
+    dl DATA_0CD900
+    dl DATA_0CD900
+    dl DATA_0CD900
+    dl DATA_0CD900
+    dl DATA_0CD900
+    dl DATA_0CF45A
+    dl DATA_0CF45A
+    dl DATA_0CF45A
+    dl DATA_0CF45A
+    dl DATA_0CF45A
+    dl DATA_0CF45A
+    dl DATA_0CF45A
+    dl DATA_0CF45A
+    dl DATA_0CF45A
+    dl DATA_0CD900
+    dl DATA_0CD900
+    dl DATA_0CD900
+    dl DATA_0CD900
+    dl DATA_0CD900
+    dl DATA_0CD900
+    dl DATA_0CD900
+    dl DATA_0CD900
+    dl DATA_0CD900
+    dl DATA_0CD900
+    dl DATA_0CD900
+    dl DATA_0CD900
+    dl DATA_0CD900
+    dl DATA_0CD900
+    dl DATA_0CD900
+    dl DATA_0CD900
+    dl DATA_0CD900
+    dl DATA_0CD900
+    dl DATA_0CD900
+    dl DATA_0CD900
+    dl DATA_0CD900
+    dl DATA_0CD900
+    dl DATA_0CD900
+    dl DATA_0CD900
+    dl DATA_0CD900
+    dl DATA_0CD900
+    dl DATA_0CD900
+    dl DATA_0CD900
+    dl DATA_0CD900
+    dl DATA_0CD900
+    dl DATA_0CD900
+    dl DATA_0CD900
+    dl DATA_0CD900
+    dl DATA_0CE674
+    dl DATA_0CDF59
+    dl DATA_0CDD44
+    dl DATA_0CDF59
+    dl DATA_0CDF59
+    dl DATA_0CE8FE
+    dl DATA_0CDE54
     dl GhostHouseExitLvlL2
-    dw DATA_0CD900 : db $FF
-    dw DATA_0CE472 : db $FF
-    dw DATA_0CDF59 : db $FF
-    dw DATA_0CE684 : db $FF
-    dw DATA_0CE674 : db $FF
-    dw DATA_0CE674 : db $FF
-    dw DATA_0CDD44 : db $FF
-    dw DATA_0CF45A : db $FF
-    dw DATA_0CDF59 : db $FF
-    dw DATA_0CDF59 : db $FF
-    dw DATA_0CDF59 : db $FF
-    dw DATA_0CDE54 : db $FF
-    dw DATA_0CDE54 : db $FF
-    dw DATA_0CE8FE : db $FF
-    dw DATA_0CF45A : db $FF
+    dl DATA_0CD900
+    dl DATA_0CE472
+    dl DATA_0CDF59
+    dl DATA_0CE684
+    dl DATA_0CE674
+    dl DATA_0CE674
+    dl DATA_0CDD44
+    dl DATA_0CF45A
+    dl DATA_0CDF59
+    dl DATA_0CDF59
+    dl DATA_0CDF59
+    dl DATA_0CDE54
+    dl DATA_0CDE54
+    dl DATA_0CE8FE
+    dl DATA_0CF45A
     dl C6Sub1LvlL20D4
-    dw DATA_0CF45A : db $FF
-    dw DATA_0CF45A : db $FF
-    dw DATA_0CDD44 : db $FF
-    dw DATA_0CE8FE : db $FF
-    dw DATA_0CF45A : db $FF
-    dw DATA_0CE674 : db $FF
-    dw DATA_0CF45A : db $FF
+    dl DATA_0CF45A
+    dl DATA_0CF45A
+    dl DATA_0CDD44
+    dl DATA_0CE8FE
+    dl DATA_0CF45A
+    dl DATA_0CE674
+    dl DATA_0CF45A
     dl C4Sub2LvlL20DC
-    dw DATA_0CDD44 : db $FF
-    dw DATA_0CEF80 : db $FF
-    dw DATA_0CD900 : db $FF
-    dw DATA_0CF45A : db $FF
-    dw DATA_0CF45A : db $FF
-    dw DATA_0CF45A : db $FF
-    dw DATA_0CDE54 : db $FF
-    dw DATA_0CEF80 : db $FF
-    dw DATA_0CF45A : db $FF
-    dw DATA_0CE674 : db $FF
+    dl DATA_0CDD44
+    dl DATA_0CEF80
+    dl DATA_0CD900
+    dl DATA_0CF45A
+    dl DATA_0CF45A
+    dl DATA_0CF45A
+    dl DATA_0CDE54
+    dl DATA_0CEF80
+    dl DATA_0CF45A
+    dl DATA_0CE674
     dl C2Sub3LvlL20E7
-    dw DATA_0CF45A : db $FF
-    dw DATA_0CE8FE : db $FF
-    dw DATA_0CE8FE : db $FF
+    dl DATA_0CF45A
+    dl DATA_0CE8FE
+    dl DATA_0CE8FE
     dl GhostHouseExitLvlL2
-    dw DATA_0CEF80 : db $FF
-    dw DATA_0CEF80 : db $FF
-    dw DATA_0CEF80 : db $FF
-    dw DATA_0CF45A : db $FF
+    dl DATA_0CEF80
+    dl DATA_0CEF80
+    dl DATA_0CEF80
+    dl DATA_0CF45A
     dl GhostHouseExitLvlL2
-    dw DATA_0CEF80 : db $FF
-    dw DATA_0CEF80 : db $FF
-    dw DATA_0CDD44 : db $FF
-    dw DATA_0CE674 : db $FF
-    dw DATA_0CDE54 : db $FF
-    dw DATA_0CDE54 : db $FF
-    dw DATA_0CE8EE : db $FF
-    dw DATA_0CF175 : db $FF
-    dw DATA_0CEF80 : db $FF
-    dw DATA_0CEF80 : db $FF
+    dl DATA_0CEF80
+    dl DATA_0CEF80
+    dl DATA_0CDD44
+    dl DATA_0CE674
+    dl DATA_0CDE54
+    dl DATA_0CDE54
+    dl DATA_0CE8EE
+    dl DATA_0CF175
+    dl DATA_0CEF80
+    dl DATA_0CEF80
     dl GhostHouseExitLvlL2
-    dw DATA_0CEF80 : db $FF
-    dw DATA_0CE674 : db $FF
-    dw DATA_0CEF80 : db $FF
-    dw DATA_0CDE54 : db $FF
-    dw DATA_0CE674 : db $FF
-    dw DATA_0CE103 : db $FF
-    dw DATA_0CDF59 : db $FF
-    dw DATA_0CDF59 : db $FF
-    dw DATA_0CD900 : db $FF
-    dw DATA_0CD900 : db $FF
-    dw DATA_0CEC82 : db $FF
-    dw DATA_0CEF80 : db $FF
-    dw DATA_0CE7C0 : db $FF
-    dw DATA_0CE8FE : db $FF
-    dw DATA_0CE8FE : db $FF
-    dw DATA_0CE8FE : db $FF
-    dw DATA_0CD900 : db $FF
-    dw DATA_0CE103 : db $FF
-    dw DATA_0CF45A : db $FF
-    dw DATA_0CE8FE : db $FF
-    dw DATA_0CF45A : db $FF
+    dl DATA_0CEF80
+    dl DATA_0CE674
+    dl DATA_0CEF80
+    dl DATA_0CDE54
+    dl DATA_0CE674
+    dl DATA_0CE103
+    dl DATA_0CDF59
+    dl DATA_0CDF59
+    dl DATA_0CD900
+    dl DATA_0CD900
+    dl DATA_0CEC82
+    dl DATA_0CEF80
+    dl DATA_0CE7C0
+    dl DATA_0CE8FE
+    dl DATA_0CE8FE
+    dl DATA_0CE8FE
+    dl DATA_0CD900
+    dl DATA_0CE103
+    dl DATA_0CF45A
+    dl DATA_0CE8FE
+    dl DATA_0CF45A
     dl VoBFLvlL2111
-    dw DATA_0CD900 : db $FF
-    dw DATA_0CE8FE : db $FF
-    dw DATA_0CEF80 : db $FF
+    dl DATA_0CD900
+    dl DATA_0CE8FE
+    dl DATA_0CEF80
     dl VoB2LvlL2115
-    dw DATA_0CE8FE : db $FF
-    dw DATA_0CE8FE : db $FF
-    dw DATA_0CE8FE : db $FF
-    dw DATA_0CE684 : db $FF
-    dw DATA_0CE8FE : db $FF
-    dw DATA_0CE674 : db $FF
-    dw DATA_0CF45A : db $FF
+    dl DATA_0CE8FE
+    dl DATA_0CE8FE
+    dl DATA_0CE8FE
+    dl DATA_0CE684
+    dl DATA_0CE8FE
+    dl DATA_0CE674
+    dl DATA_0CF45A
     dl FGHLvlL211D
-    dw DATA_0CEC82 : db $FF
-    dw DATA_0CEC82 : db $FF
-    dw DATA_0CDAB9 : db $FF
-    dw DATA_0CE674 : db $FF
-    dw DATA_0CEC82 : db $FF
-    dw DATA_0CEC82 : db $FF
-    dw DATA_0CD900 : db $FF
-    dw DATA_0CDC71 : db $FF
-    dw DATA_0CEC82 : db $FF
-    dw DATA_0CE7C0 : db $FF
-    dw DATA_0CDF59 : db $FF
-    dw DATA_0CD900 : db $FF
-    dw DATA_0CDD44 : db $FF
-    dw DATA_0CE472 : db $FF
-    dw DATA_0CD900 : db $FF
-    dw DATA_0CDF59 : db $FF
-    dw DATA_0CD900 : db $FF
-    dw DATA_0CD900 : db $FF
-    dw DATA_0CDAB9 : db $FF
-    dw DATA_0CD900 : db $FF
-    dw DATA_0CE684 : db $FF
-    dw DATA_0CD900 : db $FF
-    dw DATA_0CE8FE : db $FF
-    dw DATA_0CE684 : db $FF
-    dw DATA_0CE684 : db $FF
-    dw DATA_0CD900 : db $FF
-    dw DATA_0CD900 : db $FF
-    dw DATA_0CD900 : db $FF
-    dw DATA_0CD900 : db $FF
-    dw DATA_0CD900 : db $FF
-    dw DATA_0CD900 : db $FF
-    dw DATA_0CD900 : db $FF
-    dw DATA_0CD900 : db $FF
-    dw DATA_0CD900 : db $FF
-    dw DATA_0CD900 : db $FF
-    dw DATA_0CD900 : db $FF
-    dw DATA_0CD900 : db $FF
-    dw DATA_0CD900 : db $FF
-    dw DATA_0CD900 : db $FF
-    dw DATA_0CD900 : db $FF
-    dw DATA_0CD900 : db $FF
-    dw DATA_0CD900 : db $FF
-    dw DATA_0CD900 : db $FF
-    dw DATA_0CD900 : db $FF
-    dw DATA_0CD900 : db $FF
-    dw DATA_0CD900 : db $FF
-    dw DATA_0CD900 : db $FF
-    dw DATA_0CD900 : db $FF
-    dw DATA_0CD900 : db $FF
-    dw DATA_0CD900 : db $FF
-    dw DATA_0CD900 : db $FF
-    dw DATA_0CD900 : db $FF
-    dw DATA_0CD900 : db $FF
-    dw DATA_0CD900 : db $FF
-    dw DATA_0CD900 : db $FF
-    dw DATA_0CD900 : db $FF
-    dw DATA_0CD900 : db $FF
-    dw DATA_0CD900 : db $FF
-    dw DATA_0CD900 : db $FF
-    dw DATA_0CD900 : db $FF
-    dw DATA_0CD900 : db $FF
-    dw DATA_0CD900 : db $FF
-    dw DATA_0CD900 : db $FF
-    dw DATA_0CD900 : db $FF
-    dw DATA_0CD900 : db $FF
-    dw DATA_0CD900 : db $FF
-    dw DATA_0CD900 : db $FF
-    dw DATA_0CD900 : db $FF
-    dw DATA_0CD900 : db $FF
-    dw DATA_0CD900 : db $FF
-    dw DATA_0CD900 : db $FF
-    dw DATA_0CD900 : db $FF
-    dw DATA_0CD900 : db $FF
-    dw DATA_0CD900 : db $FF
-    dw DATA_0CD900 : db $FF
-    dw DATA_0CD900 : db $FF
-    dw DATA_0CD900 : db $FF
-    dw DATA_0CD900 : db $FF
-    dw DATA_0CD900 : db $FF
-    dw DATA_0CD900 : db $FF
-    dw DATA_0CD900 : db $FF
-    dw DATA_0CD900 : db $FF
-    dw DATA_0CD900 : db $FF
-    dw DATA_0CD900 : db $FF
-    dw DATA_0CD900 : db $FF
-    dw DATA_0CD900 : db $FF
-    dw DATA_0CD900 : db $FF
-    dw DATA_0CD900 : db $FF
-    dw DATA_0CD900 : db $FF
-    dw DATA_0CD900 : db $FF
-    dw DATA_0CD900 : db $FF
-    dw DATA_0CD900 : db $FF
-    dw DATA_0CD900 : db $FF
-    dw DATA_0CD900 : db $FF
-    dw DATA_0CD900 : db $FF
-    dw DATA_0CD900 : db $FF
-    dw DATA_0CD900 : db $FF
-    dw DATA_0CD900 : db $FF
-    dw DATA_0CD900 : db $FF
-    dw DATA_0CD900 : db $FF
-    dw DATA_0CD900 : db $FF
-    dw DATA_0CD900 : db $FF
-    dw DATA_0CD900 : db $FF
-    dw DATA_0CD900 : db $FF
-    dw DATA_0CD900 : db $FF
-    dw DATA_0CD900 : db $FF
-    dw DATA_0CD900 : db $FF
-    dw DATA_0CD900 : db $FF
-    dw DATA_0CD900 : db $FF
-    dw DATA_0CD900 : db $FF
-    dw DATA_0CD900 : db $FF
-    dw DATA_0CD900 : db $FF
-    dw DATA_0CD900 : db $FF
-    dw DATA_0CD900 : db $FF
-    dw DATA_0CD900 : db $FF
-    dw DATA_0CD900 : db $FF
-    dw DATA_0CD900 : db $FF
-    dw DATA_0CF45A : db $FF
-    dw DATA_0CF45A : db $FF
-    dw DATA_0CF45A : db $FF
-    dw DATA_0CF45A : db $FF
-    dw DATA_0CF45A : db $FF
-    dw DATA_0CF45A : db $FF
-    dw DATA_0CF45A : db $FF
-    dw DATA_0CF45A : db $FF
-    dw DATA_0CF45A : db $FF
-    dw DATA_0CD900 : db $FF
-    dw DATA_0CD900 : db $FF
-    dw DATA_0CD900 : db $FF
-    dw DATA_0CD900 : db $FF
-    dw DATA_0CD900 : db $FF
-    dw DATA_0CD900 : db $FF
-    dw DATA_0CD900 : db $FF
-    dw DATA_0CD900 : db $FF
-    dw DATA_0CD900 : db $FF
-    dw DATA_0CD900 : db $FF
-    dw DATA_0CD900 : db $FF
-    dw DATA_0CD900 : db $FF
-    dw DATA_0CD900 : db $FF
-    dw DATA_0CD900 : db $FF
-    dw DATA_0CD900 : db $FF
-    dw DATA_0CD900 : db $FF
-    dw DATA_0CD900 : db $FF
-    dw DATA_0CD900 : db $FF
-    dw DATA_0CD900 : db $FF
-    dw DATA_0CD900 : db $FF
-    dw DATA_0CD900 : db $FF
-    dw DATA_0CD900 : db $FF
-    dw DATA_0CD900 : db $FF
-    dw DATA_0CD900 : db $FF
-    dw DATA_0CD900 : db $FF
-    dw DATA_0CD900 : db $FF
-    dw DATA_0CD900 : db $FF
-    dw DATA_0CD900 : db $FF
-    dw DATA_0CD900 : db $FF
-    dw DATA_0CD900 : db $FF
-    dw DATA_0CD900 : db $FF
-    dw DATA_0CE674 : db $FF
-    dw DATA_0CE674 : db $FF
-    dw DATA_0CF45A : db $FF
-    dw DATA_0CDF59 : db $FF
-    dw DATA_0CE8FE : db $FF
-    dw DATA_0CDF59 : db $FF
-    dw DATA_0CDAB9 : db $FF
-    dw DATA_0CE8FE : db $FF
-    dw DATA_0CE8FE : db $FF
-    dw DATA_0CDD44 : db $FF
-    dw DATA_0CDD44 : db $FF
-    dw DATA_0CD900 : db $FF
-    dw DATA_0CF45A : db $FF
-    dw DATA_0CDD44 : db $FF
-    dw DATA_0CDD44 : db $FF
-    dw DATA_0CE8FE : db $FF
-    dw DATA_0CE8FE : db $FF
-    dw DATA_0CF45A : db $FF
-    dw DATA_0CE103 : db $FF
+    dl DATA_0CEC82
+    dl DATA_0CEC82
+    dl DATA_0CDAB9
+    dl DATA_0CE674
+    dl DATA_0CEC82
+    dl DATA_0CEC82
+    dl DATA_0CD900
+    dl DATA_0CDC71
+    dl DATA_0CEC82
+    dl DATA_0CE7C0
+    dl DATA_0CDF59
+    dl DATA_0CD900
+    dl DATA_0CDD44
+    dl DATA_0CE472
+    dl DATA_0CD900
+    dl DATA_0CDF59
+    dl DATA_0CD900
+    dl DATA_0CD900
+    dl DATA_0CDAB9
+    dl DATA_0CD900
+    dl DATA_0CE684
+    dl DATA_0CD900
+    dl DATA_0CE8FE
+    dl DATA_0CE684
+    dl DATA_0CE684
+    dl DATA_0CD900
+    dl DATA_0CD900
+    dl DATA_0CD900
+    dl DATA_0CD900
+    dl DATA_0CD900
+    dl DATA_0CD900
+    dl DATA_0CD900
+    dl DATA_0CD900
+    dl DATA_0CD900
+    dl DATA_0CD900
+    dl DATA_0CD900
+    dl DATA_0CD900
+    dl DATA_0CD900
+    dl DATA_0CD900
+    dl DATA_0CD900
+    dl DATA_0CD900
+    dl DATA_0CD900
+    dl DATA_0CD900
+    dl DATA_0CD900
+    dl DATA_0CD900
+    dl DATA_0CD900
+    dl DATA_0CD900
+    dl DATA_0CD900
+    dl DATA_0CD900
+    dl DATA_0CD900
+    dl DATA_0CD900
+    dl DATA_0CD900
+    dl DATA_0CD900
+    dl DATA_0CD900
+    dl DATA_0CD900
+    dl DATA_0CD900
+    dl DATA_0CD900
+    dl DATA_0CD900
+    dl DATA_0CD900
+    dl DATA_0CD900
+    dl DATA_0CD900
+    dl DATA_0CD900
+    dl DATA_0CD900
+    dl DATA_0CD900
+    dl DATA_0CD900
+    dl DATA_0CD900
+    dl DATA_0CD900
+    dl DATA_0CD900
+    dl DATA_0CD900
+    dl DATA_0CD900
+    dl DATA_0CD900
+    dl DATA_0CD900
+    dl DATA_0CD900
+    dl DATA_0CD900
+    dl DATA_0CD900
+    dl DATA_0CD900
+    dl DATA_0CD900
+    dl DATA_0CD900
+    dl DATA_0CD900
+    dl DATA_0CD900
+    dl DATA_0CD900
+    dl DATA_0CD900
+    dl DATA_0CD900
+    dl DATA_0CD900
+    dl DATA_0CD900
+    dl DATA_0CD900
+    dl DATA_0CD900
+    dl DATA_0CD900
+    dl DATA_0CD900
+    dl DATA_0CD900
+    dl DATA_0CD900
+    dl DATA_0CD900
+    dl DATA_0CD900
+    dl DATA_0CD900
+    dl DATA_0CD900
+    dl DATA_0CD900
+    dl DATA_0CD900
+    dl DATA_0CD900
+    dl DATA_0CD900
+    dl DATA_0CD900
+    dl DATA_0CD900
+    dl DATA_0CD900
+    dl DATA_0CD900
+    dl DATA_0CD900
+    dl DATA_0CD900
+    dl DATA_0CD900
+    dl DATA_0CD900
+    dl DATA_0CD900
+    dl DATA_0CD900
+    dl DATA_0CD900
+    dl DATA_0CD900
+    dl DATA_0CD900
+    dl DATA_0CD900
+    dl DATA_0CD900
+    dl DATA_0CD900
+    dl DATA_0CD900
+    dl DATA_0CD900
+    dl DATA_0CF45A
+    dl DATA_0CF45A
+    dl DATA_0CF45A
+    dl DATA_0CF45A
+    dl DATA_0CF45A
+    dl DATA_0CF45A
+    dl DATA_0CF45A
+    dl DATA_0CF45A
+    dl DATA_0CF45A
+    dl DATA_0CD900
+    dl DATA_0CD900
+    dl DATA_0CD900
+    dl DATA_0CD900
+    dl DATA_0CD900
+    dl DATA_0CD900
+    dl DATA_0CD900
+    dl DATA_0CD900
+    dl DATA_0CD900
+    dl DATA_0CD900
+    dl DATA_0CD900
+    dl DATA_0CD900
+    dl DATA_0CD900
+    dl DATA_0CD900
+    dl DATA_0CD900
+    dl DATA_0CD900
+    dl DATA_0CD900
+    dl DATA_0CD900
+    dl DATA_0CD900
+    dl DATA_0CD900
+    dl DATA_0CD900
+    dl DATA_0CD900
+    dl DATA_0CD900
+    dl DATA_0CD900
+    dl DATA_0CD900
+    dl DATA_0CD900
+    dl DATA_0CD900
+    dl DATA_0CD900
+    dl DATA_0CD900
+    dl DATA_0CD900
+    dl DATA_0CD900
+    dl DATA_0CE674
+    dl DATA_0CE674
+    dl DATA_0CF45A
+    dl DATA_0CDF59
+    dl DATA_0CE8FE
+    dl DATA_0CDF59
+    dl DATA_0CDAB9
+    dl DATA_0CE8FE
+    dl DATA_0CE8FE
+    dl DATA_0CDD44
+    dl DATA_0CDD44
+    dl DATA_0CD900
+    dl DATA_0CF45A
+    dl DATA_0CDD44
+    dl DATA_0CDD44
+    dl DATA_0CE8FE
+    dl DATA_0CE8FE
+    dl DATA_0CF45A
+    dl DATA_0CE103
     dl FDSub6LvlL21CE
     dl FDSub5LvlL21CF
-    dw DATA_0CE103 : db $FF
-    dw DATA_0CF45A : db $FF
-    dw DATA_0CF45A : db $FF
-    dw DATA_0CF45A : db $FF
-    dw DATA_0CE103 : db $FF
-    dw DATA_0CDD44 : db $FF
-    dw DATA_0CDD44 : db $FF
-    dw DATA_0CE674 : db $FF
-    dw DATA_0CE674 : db $FF
-    dw DATA_0CEF80 : db $FF
+    dl DATA_0CE103
+    dl DATA_0CF45A
+    dl DATA_0CF45A
+    dl DATA_0CF45A
+    dl DATA_0CE103
+    dl DATA_0CDD44
+    dl DATA_0CDD44
+    dl DATA_0CE674
+    dl DATA_0CE674
+    dl DATA_0CEF80
     dl GhostHouseExitLvlL2
-    dw DATA_0CEF80 : db $FF
-    dw DATA_0CEF80 : db $FF
-    dw DATA_0CEF80 : db $FF
-    dw DATA_0CF45A : db $FF
-    dw DATA_0CE8FE : db $FF
-    dw DATA_0CDD44 : db $FF
-    dw DATA_0CE7C0 : db $FF
+    dl DATA_0CEF80
+    dl DATA_0CEF80
+    dl DATA_0CEF80
+    dl DATA_0CF45A
+    dl DATA_0CE8FE
+    dl DATA_0CDD44
+    dl DATA_0CE7C0
     dl VoB2Sub2LvlL21E2
     dl VoB2Sub1LvlL21E3
-    dw DATA_0CE674 : db $FF
-    dw DATA_0CE8FE : db $FF
+    dl DATA_0CE674
+    dl DATA_0CE8FE
     dl GhostHouseExitLvlL2
     dl GhostHouseExitLvlL2
     dl FGHLvlL211D
     dl FGHLvlL211D
-    dw DATA_0CEF80 : db $FF
-    dw DATA_0CF45A : db $FF
+    dl DATA_0CEF80
+    dl DATA_0CF45A
     dl CSSub3LvlL21EC
-    dw DATA_0CE8FE : db $FF
-    dw DATA_0CE8FE : db $FF
+    dl DATA_0CE8FE
+    dl DATA_0CE8FE
     dl VD1Sub1LvlL21EF
-    dw DATA_0CE8FE : db $FF
-    dw DATA_0CE8FE : db $FF
-    dw DATA_0CF45A : db $FF
+    dl DATA_0CE8FE
+    dl DATA_0CE8FE
+    dl DATA_0CF45A
     dl C3Sub2LvlL21F3
-    dw DATA_0CF45A : db $FF
-    dw DATA_0CE8FE : db $FF
-    dw DATA_0CF45A : db $FF
-    dw DATA_0CE674 : db $FF
-    dw DATA_0CE8FE : db $FF
+    dl DATA_0CF45A
+    dl DATA_0CE8FE
+    dl DATA_0CF45A
+    dl DATA_0CE674
+    dl DATA_0CE8FE
     dl GhostHouseExitLvlL2
-    dw DATA_0CEF80 : db $FF
-    dw DATA_0CEF80 : db $FF
-    dw DATA_0CE103 : db $FF
-    dw DATA_0CE8FE : db $FF
-    dw DATA_0CF45A : db $FF
-    dw DATA_0CDF59 : db $FF
-
+    dl DATA_0CEF80
+    dl DATA_0CEF80
+    dl DATA_0CE103
+    dl DATA_0CE8FE
+    dl DATA_0CF45A
+    dl DATA_0CDF59
+    
 Ptrs05EC00:
     dw BonusGameSprites
     dw VS2Sprites001

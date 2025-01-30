@@ -1,61 +1,155 @@
 org $908000
-UploadBufferHack:
-	SEP #$20	;not gameplay mode?return right away then
-	LDA $0100
-	CMP #$07	;title screen gameplay
-	BEQ .adjustment
-	CMP #$14	;main level gameplay
-	BEQ .adjustment
-
-	REP #$20
-	LDA $03		;restored code
-	JML AfterUploadBufferHack	;the place right after the hook was added
-;	RTL
-
-;gameplay, test destination
-.adjustment
-	REP #$20
-	LDA $03			;load destination VRAM address already calculated by upload code
-;L1 check, possibly adjust
-	%uploadbuffercheck($2000, $3000, !L1yScroll)	;original at $2000, new one at $3000
-;L2 check, possibly adjust
-	%uploadbuffercheck($3000, $3800, !L2yScroll)	;original at $3000, new one at $3800
-
-.changenothing	
-	LDA $03		;the bottom out case, do not do anything
-;	JML $008755
-	JML LoadStripeImage1
-.cancelupload
-	REP #$20	;get that stuff off stack
-;get next offset, this transfer is to be cancelled
-	LDA $05		;RLE flag, either displace by 'size' byte or by 2
-	BEQ .norle
-;rle
-	INY		;4 bytes, 2 for the data, 2 for the (unused) size field		
-	INY
-	INY
-	INY
-	SEP #$20
-	JML LoadStripeImage2
-
-.norle
-	LDA [$00],y	;Y is still perfectly valid
-	INY		;skip past size bytes
-	INY
-	XBA
-	AND #$3FFF	;here's the size of attempted transfer
-	INC A		;it was size -1
-	STA $03		;free RAM, no longer holds valid address
-	TYA
-	CLC
-	ADC $03		;advance by 'size' bytes
-	TAY
-
-	SEP #$20
-	JML LoadStripeImage2	;back to SMW at the place it reads the first header word
-
 ;routine that uploads data to tilemap in VRAM
 ;--------------------------------------------
+vram:
+    ; Lunar Magic's modifications only happen in certain gamemodes
+    lda $0100
+    cmp #$14 : beq .ok
+    cmp #$07 : beq .ok
+    cmp #$13 : beq .ok
+    cmp #$05 : beq .ok
+    rtl
+.ok:
+    rep #$30
+
+    ; Write the stripe table pointer to $00
+    lda.w #!stripe_table : sta $00
+    lda.w #!stripe_table>>8 : sta $01
+
+    ; Loop through the entire stripe table
+    ldy #$0000
+.loop:
+    ; If the end bit is set, return
+    lda [$00],y : bit #$0080 : beq +
+    sep #$30
+    rtl
++   
+    ; Copy the first header word in $03
+    xba : sta $03
+
+    ; Set RLE flag in $05
+    iny #2
+    lda [$00],y : and #$0040 : sta $05
+
+    ; Compute the new VRAM destination
+    jmp lm_stripe
+
+.change:
+    ; Set the new destination in the stripe table
+    dey #2
+    xba : sta [$00],y
+    iny #2
+
+    ; Check if RLE is used
+    lda $05 : bne ..rle
+..no_rle:
+    ; If not RLE, the data is 2 + (length+1) additional bytes
+    lda [$00],y : xba : and #$3FFF
+    inc #3
+    sta $03
+    tya : clc : adc $03 : tay
+    bra .loop
+..rle:
+    ; If RLE, the data is only 4 additional bytes
+    iny #4
+    bra .loop
+
+; Adapted from Lunar Magic's code
+; If it looks bad to you, blame Fusoya :P
+lm_stripe:
+    ; Skip if destination is not layer 1 tilemap
+    lda $03 : and #$7000 : cmp #$2000 : bne .not_layer1
+
+    ; This seems to check if the tile is being drawn outside of the layer 1 tilemap's range or something
+    lda $03 : lsr #5 : and #$001F : sta $0B
+    lda $03 : and #$0800 : xba : asl #2 : tsb $0B
+    lda $1C : lsr #3 : dec #2 : and #$003F : sta $09
+    
+    sep #$20
+    clc : adc #$20 : bit #$40 : bne +
+    lda $0B : cmp $09 : bcs ++
+    jmp .skip
+++  lda $09 : clc : adc #$20 : cmp $0B : bcs ++
+    jmp .skip
++   lda $0B : cmp $09 : bcs ++
+    lda $09 : clc : adc #$20 : and #$3F : cmp $0B : bcs ++
+    jmp .skip
+++  rep #$20
+
+    ; Layer 1: $2000 -> $3000
+    lda $03 : and #$07FF : ora #$3000
+    jmp vram_change
+
+.not_layer1:
+    ; Skip if destination is not layer 2 tilemap
+    cmp #$3000 : bne .not_layer2
+
+    ; This seems to check if the tile is being drawn outside of the layer 2 tilemap's range or something
+    lda $03 : lsr #5 : and #$001F : sta $0B
+    lda $03 : and #$0800 : xba : asl #2 : tsb $0B
+    lda $20 : lsr #3 : dec #2 : and #$003F : sta $09
+
+    sep #$20
+    clc : adc #$20 : bit #$40 : bne +
+    lda $0B : cmp $09 : bcs ++
+    jmp .skip
+++  lda $09 : clc : adc #$20 : cmp $0B : bcs ++
+    jmp .skip
++   lda $0B : cmp $09 : bcs ++
+    lda $09 : clc : adc #$20 : and #$3F : cmp $0B : bcs ++
+    jmp .skip
+++  rep #$20
+
+    ; Layer 2: $3000 -> $3800
+    lda $03 : and #$07FF : ora #$3800
+    jmp vram_change
+
+.not_layer2:
+    ; Everything else: don't change
+    lda $03
+    jmp vram_change
+
+    ; We have to delete this entry from the stripe table
+    ; This fixes VRAM updates that happen offscreen vertically, which seems to happen with Mushroom Scales and Growing Pipes, for example
+    ; Solution: copy the table from the next entry to this one, and change $7F837B
+    ; It can be very time consuming, but this scenario should only happen once or twice per frame in the worst case
+    ; The code here also looks kinda bad and you can blame me this time
+.skip:
+    rep #$20
+    phb
+
+    ; Compute next data index in $03 and current data size in $07
+    lda $05 : beq +
+    lda #$0006
+    bra ++
++   lda [$00],y
+    xba : and #$03FF : clc : adc #$0005
+++  sta $07
+    dey #2
+    tya : clc : adc $07 : sta $03
+
+    ; Setup source address in X
+    clc : adc.w #!stripe_table : tax
+
+    ; Setup size-1 in A
+    lda.l !stripe_index : sec : sbc $03 : pha
+
+    ; Update stripe index
+    lda.l !stripe_index : sec : sbc $07 : sta.l !stripe_index
+
+    ; Setup destination address in Y
+    sty $03
+    tya : clc : adc.w #!stripe_table : tay
+
+    ; Transfer bytes -> effectively deletes the current entry
+    pla
+    mvn !stripe_table>>16,!stripe_table>>16
+
+    plb
+
+    ; Return with the new current index in Y
+    ldy $03
+    jmp vram_loop
 
 UploadBGData:
 	PHP

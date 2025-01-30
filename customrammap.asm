@@ -1,5 +1,6 @@
 !ram_base 	= $7F8183	;350~ BYTES FREE SPACE RAM
-
+!stripe_index = $7F837B
+!stripe_table = $7F837D
 !L1r_addr	= !ram_base	;VRAM address (equivalent to $1BE4-$1BE5)
 !L1r_buffer	= $1BE6		;256 byte buffer for horizontal writes, using the original L1 buffer for this
 !L2r_addr	= !ram_base+2	;VRAM address

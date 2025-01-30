@@ -30,8 +30,10 @@ CODE_05801E:
     BNE -                                     ; /
     STZ.W LevelLoadObject
     LDA.B Layer2DataPtr+2                     ; \
-    CMP.B #$FF                                ; |If the layer 2 data is a background,
-    BNE CODE_058074                           ; / branch to $8074
+    JML.l CODE_0EF510 ;LM Hijack
+;    CMP.B #$FF                                ; |If the layer 2 data is a background,
+;    BNE CODE_058074                           ; / branch to $8074
+After0EF510:
     REP #$10                                  ; XY->16
     LDY.W #$0000                              ; \
     LDX.B Layer2DataPtr                       ; |
@@ -47,7 +49,8 @@ CODE_05801E:
     BNE -                                     ; /
     LDA.B #$0C                                ; \ Set highest Layer 2 address to x0C
     STA.B Layer2DataPtr+2                     ; / (All backgrounds are stored in bank 0C)
-    STZ.W Empty1932                           ; \ Set tileset to 0
+After0EF5102: ;Note: This won't pause code execution as the SNES doesn't see labels -- they are only for the assembler
+    STZ.W Empty1932                           ; \ Set tileset to 0 ;Jump back from bank 0E
     STZ.W ObjectTileset                       ; /
     LDX.W #$B900
     STX.B _D

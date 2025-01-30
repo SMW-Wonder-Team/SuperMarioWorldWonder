@@ -8193,5 +8193,3 @@ unused:				; Seem to be unused additional pointers?
 	dl $000000
 	dl $000000
 	dl $000000
-org $8EFFFE
-nop

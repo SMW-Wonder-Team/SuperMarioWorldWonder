@@ -1500,7 +1500,7 @@ UpdatePipeMap16:
 	ASL A		;x2 for each pointer
 	AND.w #$0006	;four 16bit pointers	
 	TAX
-	LDA $058776,x
+	LDA MAP16AppTable,x
 	CLC		;carry need only be cleared a single time
 
 	%map16pipechange(0)

@@ -9419,6 +9419,3 @@ label_0DFF2F:
 	INC $6F
 	JSR label_0DFEA0
 	RTS
-
-org $8DFFFE
-    nop

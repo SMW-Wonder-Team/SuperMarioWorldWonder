@@ -632,36 +632,6 @@ StripeImages:                                 ; Stripe image data pointer. Index
     dl ContinueSaveStripe                     ; 1E - CONTINUE AND SAVE
     
 CutMessageStripes:                            ;
-if ver_is_japanese(!_VER)                     ;\====================== J ======================
-    dl C1Message4Stripe                       ;! 21 - Castle 1, Line 4: tabidatsunodearimashita.
-    dl C1Message3Stripe                       ;! 24 - Castle 1, Line 3: nisareta nakamaotasukedashi doonatsuheiyae
-    dl C1Message2Stripe                       ;! 27 - Castle 1, Line 2: taoshita mariotachiwa kuppanomahoude tamago
-    dl C1Message1Stripe                       ;! 2A - Castle 1, Line 1: Yoosutaatouno oshirode saishonokokuppao
-    dl C2Message4Stripe                       ;! 2D - Castle 2, Line 4: eteiruka? piichihimenounmeiya ikani!?
-    dl C2Message3Stripe                       ;! 30 - Castle 2, Line 3: hetosusundeiku!konosaki donnawanagamachikama
-    dl C2Message2Stripe                       ;! 33 - Castle 2, Line 2: doonatsuheiyakara chikanosekaino baniradoomu
-    dl C2Message1Stripe                       ;! 36 - Castle 2, Line 1: mariotachiwa nibanmenokokuppamo yattsukete
-    dl C3Message4Stripe                       ;! 39 - Castle 3, Line 4: shitara donnatabini narunodearouka!
-    dl C3Message3Stripe                       ;! 3C - Castle 3, Line 3: moshimo midoriyaakanosuitchio totteinaito
-    dl C3Message2Stripe                       ;! 3F - Castle 3, Line 2: hotto hitoiki. shikashikoosuwa kewashikunaru
-    dl C3Message1Stripe                       ;! 42 - Castle 3, Line 1: mariotachiwa sanbanmenokokuppamo yattsukete
-    dl C4Message4Stripe                       ;! 45 - Castle 4, Line 4: ginomori!hatashitemorionukerukotogadekirunoka?
-    dl C4Message3Stripe                       ;! 48 - Castle 4, Line 3: nazootokanaito derukotogadekinaitoiu fushi
-    dl C4Message2Stripe                       ;! 4B - Castle 4, Line 2: tachiwa korekara mayoinomorinihaitteiku!?
-    dl C4Message1Stripe                       ;! 4E - Castle 4, Line 1: yonbanmenokokuppamo nantokakuriaa mario
-    dl C5Message4Stripe                       ;! 51 - Castle 5, Line 4: pai. tsuginarutatakaino hojimarihajimarii!
-    dl C5Message3Stripe                       ;! 54 - Castle 5, Line 3: chokoreetouwa nazonokoosuto doragondeip
-    dl C5Message2Stripe                       ;! 57 - Castle 5, Line 2: to morionukerukotogadekita. daga konosakino
-    dl C5Message1Stripe                       ;! 5A - Castle 5, Line 1: mariotachiwa gobanmenokokuppaoyattsuke yat
-    dl C6Message4Stripe                       ;! 5D - Castle 6, Line 4: izoge mario! ganbare ruiji!
-    dl C6Message3Stripe                       ;! 60 - Castle 6, Line 3: iriguchiohirakutameno kagigaarurashii.
-    dl C6Message2Stripe                       ;! 63 - Castle 6, Line 2: konosakino chinbotsusenniwa kuppanotanino
-    dl C6Message1Stripe                       ;! 66 - Castle 6, Line 1: rokubanmenokokuppaotaoshitamariotachi!
-    dl C7Message4Stripe                       ;! 69 - Castle 7, Line 4: randoniheiwaotorimodosukotogadekirunoka?
-    dl C7Message3Stripe                       ;! 6C - Castle 7, Line 3: bujinipiichihimeotasukedashi konokyouryuu
-    dl C7Message2Stripe                       ;! 6F - Castle 7, Line 2: piichihimega torawareteiru kuppajounomi
-    dl C7Message1Stripe                       ;! 72 - Castle 7, Line 1: tsuini saigonokokuppaotaoshita! nokosuwa
-else                                          ;<================ U, SS, E0, & E1 ==============
     dl BlankStripe                            ;! 21 - Castle 1, Line 8: *empty*
     dl C1Message7Stripe                       ;! 24 - Castle 1, Line 7: travel to Donut Land.
     dl C1Message6Stripe                       ;! 27 - Castle 1, Line 6: Together, they now
@@ -718,7 +688,6 @@ else                                          ;<================ U, SS, E0, & E1
     dl C7Message3Stripe                       ;! C0 - Castle 7, Line 3: that is left is Bowser's
     dl C7Message2Stripe                       ;! C3 - Castle 7, Line 2: Koopa in castle #7. All
     dl C7Message1Stripe                       ;! C6 - Castle 7, Line 1: Mario has defeated Larry
-endif                                         ;/===============================================
 
 OtherStripes:
     dl LemmyCutBGStripe                       ; J75/UC9 - Lemmy, Larry Castle Cutscene BG
@@ -827,7 +796,7 @@ ControllerUpdate:                             ; Routine to read controller data 
     EOR.W byetudlrP2Mask                      ;|| Get controller 2 data 1, one frame.
     AND.W byetudlrP2Hold                      ;||
     STA.W byetudlrP2Frame                     ;||
-    STY.W byetudlrP2Mask                      ;//
+    STY.W byetudlrP2Mask                       ;//
     LDX.W ControllersPresent                  ;\ 
     BPL +                                     ;| If $0DA0 is set to use separate controllers, use the current player number as the controller port to accept input from.
     LDX.W PlayerTurnLvl                       ;/

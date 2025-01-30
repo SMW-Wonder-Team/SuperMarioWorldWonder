@@ -1584,7 +1584,7 @@ BG_XDisp:
 ;just a macro to make stuff run faster
 
 macro map16pipechange(step)
-	STA.w <step>+$0133*2+$0FBE
+	STA.w ((<step>+$0133)*2)+Map16Pointers
 	ADC.w #$0008
 endmacro
 
@@ -1608,7 +1608,6 @@ UpdatePipeMap16:
 
 	PLX
 	RTS
-
 ;store scrolls values -> previous values address in RAM
 ;------------------------------------------------------
 

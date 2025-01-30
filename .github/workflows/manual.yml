@@ -30,7 +30,7 @@ jobs:
         
       - name: Generate Artifact
         if: success()  # Only upload if no "Aborting." found
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: Built ROM
           path: ./SMW_U.smc  # Adjust path if the file is in a different location

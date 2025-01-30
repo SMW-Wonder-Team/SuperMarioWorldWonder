@@ -5,9 +5,11 @@
 lorom
 math pri on
 incsrc "constants.asm"
+
 incsrc "defines.asm"
 incsrc "macros.asm"
 incsrc "rammap.asm"
+incsrc "customrammap.asm"
 incsrc "bank80to8F/bank_80.asm"
 incsrc "bank80to8F/bank_81.asm"
 incsrc "bank80to8F/bank_82.asm"
@@ -24,8 +26,8 @@ incsrc "bank80to8F/bank_8F.asm"
 incsrc "bank90to9F/bank_90.asm"
 ORG $00FFC0
 
-ROMName:              db "SUPER MARIOWORLD     "                ; Internal ROM name
-MemoryMap:            db $30                                    ; LoROM, fast
+ROMName:              db "SUPERMARIOWORLDWONDER"                ; Internal ROM name
+MemoryMap:            db $30                                    ; LoROM, Fast
 CatridgeType:         db $02                                    ; ROM + SRAM + Battery
 ROMSize:              db $09                                    ; <= 4Mb ROM
 SRAMSize:             db $01                                    ; 16Kb SRAM
@@ -51,5 +53,5 @@ EmulationVectors:     dw con($FFFF,$FFFF,$0000,$0000,$0000)     ;|
                       dw I_EMPTY
                       dw I_RESET
                       dw I_EMPTY
-org $9FFFFE                                                     ;\ Expand the rom to 1MB
+org $9FFFFF                                                     ;\ Expand the rom to 1MB
 NOP                                                             ;/ 

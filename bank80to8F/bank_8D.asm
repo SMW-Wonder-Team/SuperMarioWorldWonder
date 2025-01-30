@@ -9284,6 +9284,138 @@ SpecEneNameStripe0C:                          ;!
     db $FF,$FF                                ;!
 endif                                         ;/===============================================
 
-    %insert_empty($315,$161,$161,$161,$161)
-org $8dfffe
-nop
+; Custom object used to handle direct tiles from Map16 pages 0 and 1.
+
+
+
+
+Object22:
+	LDA #$00
+	BRA label_0DF090
+	
+Object23:
+	LDA #$01
+
+label_0DF090:
+	STA $01
+	LDY #$00
+	LDA [$65],Y
+	INY
+	STA $00
+	LDA $59
+	AND #$0F
+	STA $02
+	LDA $59
+	LSR #4
+	STA $03
+	TYA
+	CLC
+	ADC $65
+	STA $65
+	BCC label_0DF0B1
+	INC $66
+
+label_0DF0B1:
+	JSR label_0DFEA0
+	LDX $02
+	LDY $57
+
+label_0DF0B8:
+	LDA $01
+	STA [$6E],Y
+	LDA $00
+	STA [$6B],Y
+	INY
+	TYA
+	AND #$0F
+	BNE label_0DF0C9
+	JSR label_0DFED0
+
+label_0DF0C9:
+	DEX
+	BPL label_0DF0B8
+	JSR label_0DFEB2
+	JSR label_0DFF10
+	LDX $02
+	DEC $03
+	BPL label_0DF0B8
+	RTS
+
+
+
+
+label_0DFEA0:
+	REP #$20
+	LDA $6B
+	STA $0C
+	LDA $6E
+	STA $0E
+	SEP #$20
+	LDA $1BA1
+	STA $0B
+	RTS
+
+
+label_0DFEB2:
+	REP #$20
+	LDA $0C
+	STA $6B
+	LDA $0E
+	STA $6E
+	SEP #$20
+	LDA $0B
+	STA $1BA1
+	RTS
+
+
+label_0DFED0:
+	LDA $57
+	AND #$F0
+	TAY
+	LDA $5B
+	LSR
+	BCC label_0DFEDF
+	INC $6C
+	INC $6F
+	RTS
+
+label_0DFEDF:
+	REP #$21
+	LDA $6B
+	ADC $13D7
+	STA $6B
+	LDA $6E
+	CLC
+	ADC $13D7
+	STA $6E
+	SEP #$20
+	INC $1BA1
+	RTS
+
+
+label_0DFF10:
+	LDA $57
+	CLC
+	ADC #$10
+	STA $57
+	TAY
+	BCS label_0DFF1B
+	RTS
+
+label_0DFF1B:
+	LDA $5B
+	LSR A
+	BCC label_0DFF2F
+	INC $6C
+	INC $6C
+	INC $6F
+	INC $6F
+	INC $1BA1
+	JSR label_0DFEA0
+	RTS
+
+label_0DFF2F:
+	INC $6C
+	INC $6F
+	JSR label_0DFEA0
+	RTS

@@ -48,13 +48,13 @@ I_RESET_FastROM:
     LDA.B #(VRam_OBJTiles>>13)|!HW_OBJ_Size_8_16
     STA.W HW_OBJSEL                           ; Set OAM character sizes to be 8x8 and 16x16.
     INC.B LagFlag                             ;
-
 GameLoop:                                     ; Main game loop.
     LDA.B LagFlag                             ;\ Wait for NMI before executing next frame.
     BEQ GameLoop                              ;/
     CLI                                       ; Enable interrupts.
     INC.B TrueFrame                           ; Increment global frame counter.
     JSR RunGameMode                           ; Run the game.
+    JSR.w VRAMPatchStripeHijack
 if !cpu_meter_dim_screen
         LDA #$0B
         STA $2100       ;   make the screen darker
@@ -141,7 +141,9 @@ SendSPCBlock:                                 ; Entry point for the SPC engine u
     STZ.W HW_APUIO3                           ;/
     PLP                                       ;
     RTS                                       ;
-
+VRAMPatchStripeHijack: ;Here because there is a rts above
+jsl vram
+rts
 UploadSPCEngine:                              ; Routine to upload the music engine to the SPC700 chip.
     LDA.B #SPC700Engine                       ;\ 
     %BorW(STA, _0)                            ;|
@@ -256,7 +258,6 @@ I_NMI_FASTROM:                                ; NMI routine.
     LDA.W IRQNMICommand                       ;\ Check if a regular level.
     BPL RegularLevelNMI                       ;|
     JMP Mode7NMI                              ;/ Otherwise, go to mode 7 routines.
-
 RegularLevelNMI:                              ;\ Set color math on all layers in $40 but 3.
     LDA.B ColorSettings                       ;|
     AND.B #~!HW_CMath_BG3                     ;/
@@ -267,8 +268,9 @@ RegularLevelNMI:                              ;\ Set color math on all layers in
     BEQ +                                     ;| If the game is lagging, skip updating stuff like sprite OAM and controller data.
     LDA.W IRQNMICommand                       ;| If in a special level, skip updating layer positions too.
     LSR A                                     ;|
-    BEQ NotSpecialLevelNMI                    ;/
-    JMP SpecialLevelNMI                       ;
+    JML ScrollUpdateSuppress
+;    BEQ NotSpecialLevelNMI                   ;/ ;Lunar Magic VRAM Patch Hijack #1
+;    JMP SpecialLevelNMI                      ;
 
   + INC.B LagFlag                             ; Allow the game loop to run after NMI.
     JSR CODE_00A488                           ; Upload palette to CGRAM.
@@ -284,8 +286,17 @@ RegularLevelNMI:                              ;\ Set color math on all layers in
     BEQ CODE_00821A                           ;||
     JSL CODE_0C9567                           ;||
     BRA CODE_00821A                           ;|/
+ScrollUpdateSuppress: ;LM Custom VRAM Patch #1
+	BEQ .normallevel
+	JML SpecialLevelNMI		;back to SMW and something special is playing
+
+.normallevel
+	JML NotSpecialLevelNMI		;back to SMW and do NOT update scroll register $$$ is this fine?
+
 CODE_008209:                                  ;|
-    JSL UploadOneMap16Strip                   ;| Update Layer 1/2 tilemaps.
+;VRAM Patch UploadBGData
+    JSL UploadBGData
+;    JSL UploadOneMap16Strip                   ;| Update Layer 1/2 tilemaps.
     LDA.W UploadMarioStart                    ;|\ 
     BEQ CODE_008217                           ;|| If set to do so, upload graphics for black screen messages (MARIO START/GAME OVER/TIME UP/etc).
     JSR CODE_00A7C2                           ;||  Then skip way down to the $12 tilemap handling.
@@ -642,36 +653,6 @@ StripeImages:                                 ; Stripe image data pointer. Index
     dl ContinueSaveStripe                     ; 1E - CONTINUE AND SAVE
     
 CutMessageStripes:                            ;
-if ver_is_japanese(!_VER)                     ;\====================== J ======================
-    dl C1Message4Stripe                       ;! 21 - Castle 1, Line 4: tabidatsunodearimashita.
-    dl C1Message3Stripe                       ;! 24 - Castle 1, Line 3: nisareta nakamaotasukedashi doonatsuheiyae
-    dl C1Message2Stripe                       ;! 27 - Castle 1, Line 2: taoshita mariotachiwa kuppanomahoude tamago
-    dl C1Message1Stripe                       ;! 2A - Castle 1, Line 1: Yoosutaatouno oshirode saishonokokuppao
-    dl C2Message4Stripe                       ;! 2D - Castle 2, Line 4: eteiruka? piichihimenounmeiya ikani!?
-    dl C2Message3Stripe                       ;! 30 - Castle 2, Line 3: hetosusundeiku!konosaki donnawanagamachikama
-    dl C2Message2Stripe                       ;! 33 - Castle 2, Line 2: doonatsuheiyakara chikanosekaino baniradoomu
-    dl C2Message1Stripe                       ;! 36 - Castle 2, Line 1: mariotachiwa nibanmenokokuppamo yattsukete
-    dl C3Message4Stripe                       ;! 39 - Castle 3, Line 4: shitara donnatabini narunodearouka!
-    dl C3Message3Stripe                       ;! 3C - Castle 3, Line 3: moshimo midoriyaakanosuitchio totteinaito
-    dl C3Message2Stripe                       ;! 3F - Castle 3, Line 2: hotto hitoiki. shikashikoosuwa kewashikunaru
-    dl C3Message1Stripe                       ;! 42 - Castle 3, Line 1: mariotachiwa sanbanmenokokuppamo yattsukete
-    dl C4Message4Stripe                       ;! 45 - Castle 4, Line 4: ginomori!hatashitemorionukerukotogadekirunoka?
-    dl C4Message3Stripe                       ;! 48 - Castle 4, Line 3: nazootokanaito derukotogadekinaitoiu fushi
-    dl C4Message2Stripe                       ;! 4B - Castle 4, Line 2: tachiwa korekara mayoinomorinihaitteiku!?
-    dl C4Message1Stripe                       ;! 4E - Castle 4, Line 1: yonbanmenokokuppamo nantokakuriaa mario
-    dl C5Message4Stripe                       ;! 51 - Castle 5, Line 4: pai. tsuginarutatakaino hojimarihajimarii!
-    dl C5Message3Stripe                       ;! 54 - Castle 5, Line 3: chokoreetouwa nazonokoosuto doragondeip
-    dl C5Message2Stripe                       ;! 57 - Castle 5, Line 2: to morionukerukotogadekita. daga konosakino
-    dl C5Message1Stripe                       ;! 5A - Castle 5, Line 1: mariotachiwa gobanmenokokuppaoyattsuke yat
-    dl C6Message4Stripe                       ;! 5D - Castle 6, Line 4: izoge mario! ganbare ruiji!
-    dl C6Message3Stripe                       ;! 60 - Castle 6, Line 3: iriguchiohirakutameno kagigaarurashii.
-    dl C6Message2Stripe                       ;! 63 - Castle 6, Line 2: konosakino chinbotsusenniwa kuppanotanino
-    dl C6Message1Stripe                       ;! 66 - Castle 6, Line 1: rokubanmenokokuppaotaoshitamariotachi!
-    dl C7Message4Stripe                       ;! 69 - Castle 7, Line 4: randoniheiwaotorimodosukotogadekirunoka?
-    dl C7Message3Stripe                       ;! 6C - Castle 7, Line 3: bujinipiichihimeotasukedashi konokyouryuu
-    dl C7Message2Stripe                       ;! 6F - Castle 7, Line 2: piichihimega torawareteiru kuppajounomi
-    dl C7Message1Stripe                       ;! 72 - Castle 7, Line 1: tsuini saigonokokuppaotaoshita! nokosuwa
-else                                          ;<================ U, SS, E0, & E1 ==============
     dl BlankStripe                            ;! 21 - Castle 1, Line 8: *empty*
     dl C1Message7Stripe                       ;! 24 - Castle 1, Line 7: travel to Donut Land.
     dl C1Message6Stripe                       ;! 27 - Castle 1, Line 6: Together, they now
@@ -728,7 +709,6 @@ else                                          ;<================ U, SS, E0, & E1
     dl C7Message3Stripe                       ;! C0 - Castle 7, Line 3: that is left is Bowser's
     dl C7Message2Stripe                       ;! C3 - Castle 7, Line 2: Koopa in castle #7. All
     dl C7Message1Stripe                       ;! C6 - Castle 7, Line 1: Mario has defeated Larry
-endif                                         ;/===============================================
 
 OtherStripes:
     dl LemmyCutBGStripe                       ; J75/UC9 - Lemmy, Larry Castle Cutscene BG
@@ -837,7 +817,7 @@ ControllerUpdate:                             ; Routine to read controller data 
     EOR.W byetudlrP2Mask                      ;|| Get controller 2 data 1, one frame.
     AND.W byetudlrP2Hold                      ;||
     STA.W byetudlrP2Frame                     ;||
-    STY.W byetudlrP2Mask                      ;//
+    STY.W byetudlrP2Mask                       ;//
     LDX.W ControllersPresent                  ;\ 
     BPL +                                     ;| If $0DA0 is set to use separate controllers, use the current player number as the controller port to accept input from.
     LDX.W PlayerTurnLvl                       ;/
@@ -934,8 +914,8 @@ LoadStripeImage:                              ; Subroutine to upload a specific 
     ORA.B #!HW_DMA_2Byte2Addr                 ;|
     STA.W HW_DMAPARAM+$10                     ;/
     REP #$20                                  ; A->16
-    LDA.B _3                                  ;\ Set destination.
-    STA.W HW_VMADD                            ;/
+    LDA.B _3                                  ;\ Set destination. 
+    STA.W HW_VMADD                            ;/ ;Jump mere from InitLastUpdaes
     LDA.B [_0],Y                              ;\ 
     XBA                                       ;|
     AND.W #%0011111111111111                  ;|
@@ -1114,10 +1094,10 @@ UploadL2Map16Strip:                           ; Done with Layer 1.
     LDA.B #0                                  ;\ Clear update flag for Layer 1.
     STA.W Layer1VramAddr                      ;/ 
     LDA.W Layer2VramAddr                      ;\ If $1CE6 is non-zero, update Layer 2.
-    BNE +                                     ;/
+    BNE UploadL2Map16StripScreenMode          ;/
     JMP FinishUploadMap16Strip                ; Else, return.
-
-  + LDA.B ScreenMode                          ;\ Need to update Layer 2.
+UploadL2Map16StripScreenMode:
+    LDA.B ScreenMode                          ;\ Need to update Layer 2.
     AND.B #!ScrMode_Layer2Vert                ;| Jump down if in a vertical level.
     BEQ UploadOneL2Column                     ;|
     JMP UploadOneL2Row                        ;/
@@ -2262,7 +2242,8 @@ NintendoTile:                                 ; Tilemap for the "Nintendo Presen
 
 GM00LoadPresents:                             ; Game Mode 00 - Load Nintendo Presents
     JSR ClearOutLayer3                        ; Clean out Layer 3.
-    JSR SetUpScreen                           ; Set up various registers (screen mode, CGADDSUB, windows...).
+    JSR SetUpScreen                           ; VRAM patch #2
+;	JML ScreenSetupHack
     JSR CODE_00A993                           ; Load Layer 3 GFX.
     LDY.B #4*(4-1)                            ;\ Load Nintendo Presents logo
     LDX.B #4-1                                ;|
@@ -2653,6 +2634,7 @@ CODE_0096CF:
     STY.W OWPlayerSubmap
 
 GM11LoadLevel:                                ; Game Mode 11 - Load Level (Mario Start!)
+;Fixing a LM issue here
     STZ.W HW_NMITIMEN                         ;
     JSR NoButtons                             ; Disable input.
     LDA.W SublevelCount                       ;\ 
@@ -4880,8 +4862,10 @@ CODE_00A594:
 GM12PrepLevel:
     JSR ClearOutLayer3                        ; gah, stupid keyboard >_<
     JSR NoButtons
-    STZ.W UploadMarioStart
-    JSR SetUpScreen
+;    STZ.W UploadMarioStart
+;    JSR SetUpScreen
+    JML ScreenSetupHack
+AfterScreenSetup:
     JSR UploadStaticBar
     JSL CODE_05809E                           ; ->here
     LDA.W IRQNMICommand
@@ -6149,8 +6133,6 @@ CODE_00B068:
     STZ.W Empty0AF5
 Return00B090:
     RTS
-
-;    %insert_empty($11,$0F,$36,$1D,$1B)
 
 BackAreaColors:
     %incpal("col/misc/back_area.pal")
@@ -7484,6 +7466,9 @@ CODE_00C0C4:
     STA.B [Map16LowPtr],Y                     ; /
     REP #$20                                  ; A->16
     AND.W #$00FF
+;    JML UploadBufferHack
+    BRA.b AfterUploadBufferHack
+AfterUploadBufferHack:
     ORA.W #$0100
     ASL A
     TAY
@@ -13668,8 +13653,11 @@ UpdateScreenPosition:
     REP #$20                                  ; A->16
     LDA.W CameraMoveTrigger
     SEC
-    SBC.W #$000C
+    ;VRAM Patch Hijack
+    JML StorePreviousScroll
+    ;SBC.W #$000C
     STA.W CameraLeftBuffer
+UpdateScreenPosition2:
     CLC
     ADC.W #$0018
     STA.W CameraRightBuffer
@@ -13798,7 +13786,9 @@ CODE_00F7C2:
     SEC
     SBC.W NextLayer2YPos
     STA.W Layer2DYPos
-    LDX.B #$07
+    ;VRAM Patch Hijack
+	JML CalculateScrollDirection
+;    LDX.B #$07
   - LDA.B Layer1XPos,X
     STA.W NextLayer1XPos,X
     DEX
@@ -14834,7 +14824,3 @@ CODE_00FF73:
     STA.B Layer3YPos
     SEP #$20                                  ; A->8
     RTL
-
-;    %insert_empty($90,$2D,$2D,$0B,$0B)
-org $80fffe
-nop

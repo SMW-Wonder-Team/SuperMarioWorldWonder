@@ -24,7 +24,7 @@ incsrc "bank80to8F/bank_8F.asm"
 incsrc "bank90to9F/bank_90.asm"
 ORG $00FFC0
 
-ROMName:              db "SUPER MARIOWORLDWONDER"                ; Internal ROM name
+ROMName:              db "SUPERMARIOWORLDWONDER"                ; Internal ROM name
 MemoryMap:            db $30                                    ; LoROM, Fast
 CatridgeType:         db $02                                    ; ROM + SRAM + Battery
 ROMSize:              db $09                                    ; <= 4Mb ROM
@@ -51,5 +51,5 @@ EmulationVectors:     dw con($FFFF,$FFFF,$0000,$0000,$0000)     ;|
                       dw I_EMPTY
                       dw I_RESET
                       dw I_EMPTY
-org $9FFFFF                                                     ;\ Expand the rom to 1MB
+org $9FFFFE                                                     ;\ Expand the rom to 1MB
 NOP                                                             ;/ 

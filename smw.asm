@@ -5,6 +5,8 @@
 lorom
 math pri on
 incsrc "constants.asm"
+
+incsrc "defines.asm"
 incsrc "macros.asm"
 incsrc "rammap.asm"
 incsrc "customrammap.asm"
@@ -51,5 +53,5 @@ EmulationVectors:     dw con($FFFF,$FFFF,$0000,$0000,$0000)     ;|
                       dw I_EMPTY
                       dw I_RESET
                       dw I_EMPTY
-org $9FFFFE                                                     ;\ Expand the rom to 1MB
+org $9FFFFF                                                     ;\ Expand the rom to 1MB
 NOP                                                             ;/ 

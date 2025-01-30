@@ -8954,3 +8954,5 @@ ADDR_04FF73:
     RTS
 
     %insert_empty($57,$4F,$4F,$4F,$4F)
+org $84fffe
+nop

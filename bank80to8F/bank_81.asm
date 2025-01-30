@@ -2753,13 +2753,16 @@ CODE_019386:
     BEQ Return0193AF                          ; /
     CMP.B #$0B                                ; \ Return if sprite status == Carried
     BEQ Return0193AF                          ; /
-    LDA.B SpriteYPosLow,X
-    SEC
-    SBC.B #$01
-    STA.B SpriteYPosLow,X
-    LDA.W SpriteYPosHigh,X
-    SBC.B #$00
-    STA.W SpriteYPosHigh,X
+    ;Optimize 1F0
+    LDA $0C
+    AND #$0F
+    EOR #$FF
+    CLC
+    ADC !sprite_y_low,x
+    STA !sprite_y_low,x
+    LDA !sprite_y_high,x
+    ADC #$FF
+    STA !sprite_y_high,x
     JSR CODE_0192C9
 Return0193AF:
     RTS
@@ -3635,6 +3638,8 @@ HandleSprSpinJump:
     LSR A                                     ; |
     LSR A                                     ; |
     AND.B #$03                                ; |
+    BRA.b DisplaySpinJumpSmoke
+DisplaySpinJumpSmoke:
     PHX                                       ; |
     TAX                                       ; |
     LDA.W SpinJumpSmokeTiles,X                ; |
@@ -6384,10 +6389,45 @@ CODE_01AEFA:
     STA.W ScreenShakeTimer                    ; /
     LDA.B #!SFX_KAPOW
     STA.W SPCIO3                              ; / Play sound effect
+    JSL Smokequake
     LDA.B #$40
     STA.W SpriteMisc1540,X
     INC.B SpriteTableC2,X
   + RTS
+
+Smokequake:        
+    LDA $15A0,x
+    ORA $186C,x
+    BNE .return
+    LDA #$F4			;Horizontal disposition of the first smoke particle
+    STA $00
+    JSR +
+    LDA #$0C			;Horizontal disposition of the second smoke particle
+    STA $00
+    JSR +
+.return
+    RTL
+
++   LDY #$03
+-   LDA $17C0,y           
+    BEQ +
+    DEY
+    BPL -
+    RTS
+
++   LDA #$01
+    STA $17C0,y           ;Load smoke sprite number
+    LDA $D8,x
+    CLC : ADC #$18              ;Vertical disposition of the smoke effect
+    STA $17C4,y        
+    LDA #!ThwompSmokeTimer         
+    STA $17CC,y        
+    LDA $E4,x            
+    CLC : ADC $00               ; \ Both of the smoke's x dispositions are called here
+    STA $17C8,y           ; | Messing with the above value (ADC $00) will make both 
+    LDX $15E9          	; / appear on the same spot.
+.noSmoke
+    RTS
 
 CODE_01AF24:
     LDA.W SpriteMisc1540,X
@@ -10480,7 +10520,6 @@ CODE_01CCF0:
     STA.W SpriteMisc1528,X
     RTS
 
-    %insert_empty($00,$0C,$0C,$06,$06)
 
 PipeKoopaKids:
     JSL CODE_03CC09
@@ -13164,6 +13203,8 @@ CODE_01E164:
     TAX
     LDA.W BowserFlameTiles,X
     STA.W OAMTileNo+$100,Y
+    LDA.W BowserFlameTiles,X
+    STA.W OAMTileNo+$100,Y
     LDA.W DATA_01E194,X
     ORA.B SpriteProperties
     STA.W OAMTileAttr+$100,Y
@@ -13253,14 +13294,16 @@ CODE_01E201:
     STA.W SPCIO2                              ; / Change music
     INC.W PlayerIsFrozen
     INC.B SpriteLock
-    LDA.W SpriteXPosHigh,X
-    STA.W KeyholeXPos+1
+    REP.b #$20
+;    LDA.W SpriteXPosHigh,X
+;    STA.W KeyholeXPos+1
     LDA.B SpriteXPosLow,X
     STA.W KeyholeXPos
-    LDA.W SpriteYPosHigh,X
-    STA.W KeyholeYPos+1
+;    LDA.W SpriteYPosHigh,X
+;    STA.W KeyholeYPos+1
     LDA.B SpriteYPosLow,X
     STA.W KeyholeYPos
+    SEP.b #$20
     LDA.B #$30
     STA.W SpriteMisc154C,X
 CODE_01E23A:
@@ -13323,7 +13366,6 @@ CODE_01E28C:
     STA.W ClusterSpriteMisc1E52,Y
     RTS
 
-    %insert_empty($0D,$18,$18,$11,$0A)
 
     db $13,$14,$15,$16,$17,$18,$19
 
@@ -13374,14 +13416,16 @@ CODE_01E309:
     LDA.B SpriteNumber,X
     CMP.B #$4E
     BNE CODE_01E343
+    REP.b #$20
     LDA.B SpriteXPosLow,X                     ; \ $9A = Sprite X position
     STA.B TouchBlockXPos                      ; | for block creation
-    LDA.W SpriteXPosHigh,X                    ; |
-    STA.B TouchBlockXPos+1                    ; /
+;    LDA.W SpriteXPosHigh,X                    ; |
+;    STA.B TouchBlockXPos+1                    ; /
     LDA.B SpriteYPosLow,X                     ; \ $98 = Sprite Y position
     STA.B TouchBlockYPos                      ; | for block creation
-    LDA.W SpriteYPosHigh,X                    ; |
-    STA.B TouchBlockYPos+1                    ; /
+;    LDA.W SpriteYPosHigh,X                    ; |
+;    STA.B TouchBlockYPos+1                    ; /
+    SEP.b #$20
     LDA.B #$08                                ; \ Block to generate = Mole hole
     STA.B Map16TileGenerate                   ; /
     JSL GenerateTile
@@ -17116,4 +17160,5 @@ CODE_01FF98:
     PLX
     RTS
 
-    %insert_empty($3E,$41,$41,$41,$41)
+org $81fffe
+nop

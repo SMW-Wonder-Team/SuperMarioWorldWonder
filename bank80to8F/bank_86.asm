@@ -458,3 +458,4 @@ label_06F5E4:		; Alternative entry to $06F540, storing the pointer to $65.
 	STA $65
 	LDY #$0000
 	RTL
+

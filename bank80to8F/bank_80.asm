@@ -5381,7 +5381,7 @@ GFXTransferLoop:
     INY
     DEX
     BPL -                                     ; FG/Bg to upload -> $04 - $07
-    LDA.B #$03
+    LDA.B #$03 ;LM Hijack
     STA.B _F                                  ; #$03 -> $0F
 CODE_00AA35:
     LDX.B _F                                  ; $0F -> X

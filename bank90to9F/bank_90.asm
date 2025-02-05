@@ -2465,3 +2465,169 @@ LDA #$43			;disable left and right direction buttons
 TRB $16				;
 TRB $15				;can't hold X/Y (to make sure player doesn't grab anything during ground pound and cancel it)
 RTS
+CODE_0FF840:
+	PHA
+	LDA.l $7FC009
+	CMP.b #$42
+	BEQ.b CODE_0FF84D
+	PLA
+	LDA.b #$00
+	RTS
+
+CODE_0FF84D:
+	PLA
+CODE_0FF84E:
+	PHX
+	PHY
+	PHP
+	ASL
+	TAY
+	REP.b #$30
+	LDA.l $7FC006
+	STA.b $8A
+	LDA.l $7FC007
+	STA.b $8B
+	LDA.b [$8A],y
+	AND.w #$0FFF
+	JSR.w CODE_0FF8CB
+	PLP
+	PLY
+	PLX
+	LDA.b #$01
+	RTS
+
+DATA_0FF86F:
+	db $65,$8A,$AA,$BF
+	dl ExGfxPtrTableExt				; This is a pointer to the ExGFX table, entries 100-FFF
+CODE_0FF944:
+	AND.w #$007F
+	STA.b $8A
+	ASL
+	CLC
+	ADC.b $8A
+	TAX
+	LDA.l DATA_0FF600,x
+	STA.b $8A
+	LDA.l DATA_0FF600+$01,x
+	STA.b $8B
+CODE_0FF95A:
+	SEP.b #$30
+	PHK
+	PER.w $0005
+	PHB
+	PHY
+	JML.l $00BA47
+	REP.b #$30
+	LDA.w #$0100
+CODE_0FF96B:
+	PLP
+	PLY
+	PLX
+	RTL
+
+CODE_03BCE0:
+	JSL.l CODE_05DC80
+	TAY
+	AND.b #$87
+	TSB.w $192A
+	TYA
+	AND.b #$08
+	LSR
+	LSR
+	LSR
+	STA.b $0F
+	JSL.l CODE_05DC85
+	STA.b $02
+	AND.b #$7F
+	STA.b $04
+	JSL.l CODE_05DC8A
+	TAX
+	AND.b #$C0
+	STA.w $13CD
+	TXA
+	AND.b #$20
+	ASL
+	TSB.w $192A
+	LDX.b $0E
+	LDA.l DATA_06FC00,x
+	AND.b #$80
+	TSB.b $04
+	LDA.l DATA_06FE00,x
+	AND.b #$3F
+	TSB.w $13CD
+	TYA
+	BIT.b #$40
+	BEQ.b CODE_03BD44
+	AND.b #$30
+	ASL
+	ASL
+	ASL
+	STA.b $94
+	ROL
+	STA.b $95
+	LDA.b $01
+	LSR
+	AND.b #$70
+	TSB.b $94
+	LDA.b $00
+	ASL
+	ASL
+	ASL
+	ASL
+	STA.b $96
+	LDA.b $02
+	AND.b #$3F
+	STA.b $97
+CODE_03BD44:
+	LDA.b $02
+	BMI.b CODE_03BD51
+	LDA.b $00
+	LSR
+	LSR
+	LSR
+	LSR
+	STA.b $02
+	RTL
+
+CODE_03BD51:
+	LDA.b #$0C
+	STA.w $0100
+	STZ.w $0DAE
+	STZ.w $0DAF
+	STZ.w $0DB0
+	TYA
+	BIT.b #$10
+	BEQ.b CODE_03BD6D
+	LDA.b $00
+	STA.w $1DF6
+	INC.w $1B9C
+	TYA
+CODE_03BD6D:
+	BIT.b #$20
+	BEQ.b CODE_03BD77
+	LDA.b $01
+	STA.w $1DEA
+	TYA
+CODE_03BD77:
+	AND.b #$07
+	CMP.b #$07
+	BNE.b CODE_03BD7F
+	LDA.b #$80
+CODE_03BD7F:
+	STA.w $0DD5
+	ASL
+	BEQ.b CODE_03BD8B
+	INC.w $13CE
+	INC.w $1DE9
+CODE_03BD8B:
+	PLX
+	PLA
+	PLB
+	PLX
+	PLA
+	SEP.b #$30
+	JML.l $0093F7
+
+	db $FF,$FF,$FF,$FF,$FF,$FF
+	db $4C,$4D,$10,$01
+

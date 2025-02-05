@@ -2880,8 +2880,8 @@ CODE_0EF583:
 	CLC
 	ADC.b $00
 	TAX
-	LDY.w DATA_0EF600,x				;\ Custom level palette pointers
-	LDA.w DATA_0EF600+$02,x				;/
+	LDY.w ColorPtrTable,x				;\ Custom level palette pointers
+	LDA.w ColorPtrTable+$02,x				;/
 	AND.w #$00FF
 	BNE.b +
 	PLB
@@ -2906,3 +2906,11 @@ CODE_0EF583:
 	BNE.b -
 	RTS
 	
+DATA_0FFEB4:
+	db $00,$20,$00,$10,$00,$08,$00,$00
+
+DATA_0FFEBC:
+	db $A0,$50,$00,$50,$80,$50,$00,$58
+
+DATA_0FFEC4:
+	db $40,$01,$00,$00,$00,$01,$00,$00

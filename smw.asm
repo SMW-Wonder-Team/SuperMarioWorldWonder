@@ -24,6 +24,7 @@ incsrc "bank80to8F/bank_8D.asm"
 incsrc "bank80to8F/bank_8E.asm"
 incsrc "bank80to8F/bank_8F.asm"
 incsrc "bank90to9F/bank_90.asm"
+incsrc "lvl/ExGFXPointers.asm"
 ORG $00FFC0
 
 ROMName:              db "SUPERMARIOWORLDWONDER"                ; Internal ROM name

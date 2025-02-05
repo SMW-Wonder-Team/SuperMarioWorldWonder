@@ -8,3 +8,5 @@ __*
 *.code-workspace
 *.sym
 Lunar Magic/
+gfx/u/
+samples/

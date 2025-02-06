@@ -439,8 +439,9 @@ LoadAgain:
     LDA.W LevelModeSetting                    ; Get current level mode
     CMP.B #$09                                ; \
     BEQ LoadLevelDone                         ; |
-    CMP.B #$0B                                ; |If the current level is a boss level,
-    BEQ LoadLevelDone                         ; |don't load anything else.
+    ; CMP.B #$0B                                ; |If the current level is a boss level,
+    ; BEQ LoadLevelDone                         ; |don't load anything else.
+    JSL.l CODE_0FF7F0
     CMP.B #$10                                ; |
     BEQ LoadLevelDone                         ; /
     LDY.B #$00                                ; \
@@ -7168,8 +7169,10 @@ CODE_05D7A8:
     LDA.L DATA_05D758,X
     STA.B PlayerXPosNext+1
     LDA.W DATA_05FE00,Y
-    AND.B #$07
-    STA.W LevelEntranceType
+;    AND.B #$07
+;    STA.W LevelEntranceType
+ 	TYX
+ 	JSL.l CODE_03BCE0
   + JMP CODE_05D8B7
 
 CODE_05D83E:

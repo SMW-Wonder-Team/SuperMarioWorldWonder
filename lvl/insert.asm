@@ -3231,19 +3231,19 @@ incbin "lvl/settings/1FF_Set.bin":$26..$27
 .End:
 
 DATA_05F800:
-incbin "Misc/SMWW_SETBL05F800_Misc.bin":$00..$200
+incbin "Misc/SMWW_SETBL05F800_Misc.bin";:$00..$200
 .End:
 
 DATA_05FA00:
-incbin "Misc/SMWW_SETBL05FA00_Misc.bin":$00..$200
+incbin "Misc/SMWW_SETBL05FA00_Misc.bin";:$00..$200
 .End:
 
 DATA_05FC00:
-incbin "Misc/SMWW_SETBL05FC00_Misc.bin":$00..$200
+incbin "Misc/SMWW_SETBL05FC00_Misc.bin";:$00..$200
 .End:
 
 DATA_05FE00:
-incbin "Misc/SMWW_SETBL05FE00_Misc.bin":$00..$200
+incbin "Misc/SMWW_SETBL05FE00_Misc.bin";:$00..$200
 .End:
 
 DATA_03FE00:							; Lunar Magic table

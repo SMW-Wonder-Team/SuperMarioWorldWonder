@@ -372,7 +372,6 @@ asar "Test.asm" lvl/global/%ID%TitleScreenDemoMoves_Misc.bin
 
 :Done
 echo Done^^!
-goto :Begin
 
 :ConvertDecToHex 
 set LOOKUP=0123456789abcdef

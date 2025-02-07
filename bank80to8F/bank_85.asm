@@ -7268,8 +7268,8 @@ CODE_05D8B7:
     STA.B SpriteDataPtr                       ; |Store location of sprite level Y in $CE-$CF
     LDA.W Ptrs05EC00+1,Y                      ; |
     STA.B SpriteDataPtr+1                     ; /
-    LDA.B #$07                                ; \ Set highest byte to x07
-    STA.B SpriteDataPtr+2                     ; / (All sprite data is stored in bank 07)
+    LDA.B Ptrs05EC00+2,Y                      ; \ Set highest byte to equivilant
+    STA.B SpriteDataPtr+2                     ; / (Modified from LDA.B #$07, which forces sprite data to be in bank 7)
     LDA.B [SpriteDataPtr]                     ; \ Get first byte of sprite data (header)
     AND.B #$3F                                ; |Get level's sprite memory
     STA.W SpriteMemorySetting                 ; / Store in $1692

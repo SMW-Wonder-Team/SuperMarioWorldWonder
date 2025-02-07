@@ -1,12 +1,12 @@
 ; New Macros
 
 ;---------------------------------------------------------------------------
-
+org $9A8000
 ; This will insert all the level palette data where it's inserted.
 ; This is to insert them all as one continuous block, after modifying the LM palette buffer routine to support bank crossing.
 ; Put this at the start of a "super bank", where bank crossing is disabled.
 !LvlFFF_Flags = $FF
-!LevelPaletteUploadAddress #= $AB8900
+!LevelPaletteUploadAddress #= $9AA000
 !LevelPalettesInserted = 0
 
 macro SMWW_InsertCustomLevelPalettes()
